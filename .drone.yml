@@ -1,17 +1,85 @@
----
-
 kind: pipeline
 type: kubernetes
 name: lint
 
-steps:
-- name: lint docker-compose
-  image: docker/compose
-  commands:
-    - docker-compose -f docker/docker-compose.yml config
-
 trigger:
   event:
     - push
+
+steps:
+  - name: lint docker-compose
+    image: docker/compose
+    commands:
+      - docker-compose -f docker/docker-compose.yml config
+
+---
+
+kind: pipeline
+type: kubernetes
+name: mass-deploy
+
+trigger:
+  event:
+    - promote
+  target:
+    exclude:
+      - release # not set up yet
+      - "*-prod" # pipeline not mature enough
+
+# to deploy all of HOCS to an environment:
+# drone build promote -p VERSION=0.0.0 UKHomeOffice/hocs n
+
+steps:
+  - name: deploy-info
+    image: plugins/downstream
+    settings:
+      environment: ${DRONE_DEPLOY_TO}
+      version: ${VERSION}
+      token:
+        from_secret: drone_token
+        fork: true
+        wait: true
+        timeout: 300
+        repositories:
+          - UKHomeOffice/hocs-info-service
+
+  - name: deploy-backend
+    image: plugins/downstream
+    settings:
+      environment: ${DRONE_DEPLOY_TO}
+      token:
+        from_secret: drone_token
+        fork: true
+        wait: true
+        timeout: 300
+        repositories:
+          - UKHomeOffice/hocs-audit
+          - UKHomeOffice/hocs-case-creator
+          - UKHomeOffice/hocs-casework
+          - UKHomeOffice/hocs-docs
+          - UKHomeOffice/hocs-docs-converter
+          - UKHomeOffice/hocs-notify
+          - UKHomeOffice/hocs-search
+          - UKHomeOffice/hocs-templates
+          - UKHomeOffice/hocs-workflow
+      depends_on:
+        - deploy-info
+
+  - name: frontend-services
+    image: plugins/downstream
+    settings:
+      environment: ${DRONE_DEPLOY_TO}
+      version: ${VERSION}
+      token:
+        from_secret: drone_token
+        fork: true
+        wait: true
+        timeout: 300
+        repositories:
+          - UKHomeOffice/hocs-frontend
+          - UKHomeOffice/hocs-management-ui
+      depends_on:
+        - deploy-info
+        - deploy-backend
 
 ...
