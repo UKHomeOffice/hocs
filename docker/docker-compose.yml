@@ -1,4 +1,4 @@
-version: '3.4'
+version: '2.4' # v3 doesn't support depends_on condition
 
 services:
 
@@ -188,8 +188,6 @@ services:
       timeout: 30s
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-workflow:${WORKFLOW_TAG:-branch-main}
-    mem_limit: 2G
-    mem_reservation: 1536M
     ports:
       - 8091:8080
     networks:
