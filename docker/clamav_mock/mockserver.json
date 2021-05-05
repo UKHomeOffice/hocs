@@ -1,0 +1,10 @@
+[
+  {
+    "httpRequest": {
+      "path": "/scan"
+    },
+    "httpResponse": {
+      "body": "Everything ok : true"
+    }
+  }
+]
