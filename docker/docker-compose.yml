@@ -112,7 +112,7 @@ services:
         condition: service_healthy
 
   load_elastic:
-    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/hocs-data-elastic:${HOCS_DATA_ELASTIC_TAG:-branch-main}
+    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/${HOCS_DATA_ELASTIC_REPO:-hocs-data-elastic}:${HOCS_DATA_TAG:-branch-main}
     environment:
       ELASTIC_HOST: localstack
     networks:

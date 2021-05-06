@@ -85,12 +85,17 @@ CASEWORK_TAG=branch-epic_HOCS-COMP
 WORKFLOW_TAG=branch-epic_HOCS-COMP
 CASE_CREATOR_TAG=branch-epic_HOCS-COMP
 INFO_TAG=branch-epic_HOCS-COMP
-HOCS_DATA_TAG=branch-epic_HOCS-COMP
+HOCS_DATA_TAG=branch-feature_HOCS-2907-compose-up-all
+HOCS_DATA_REPO=hocs-data
+HOCS_DATA_ELASTIC_REPO=hocs-data-elastic
 ```
-The syntax of a tag for a feature branch looks like this:
-```shell
-HOCS_DATA_ELASTIC_TAG=branch-feature_HOCS-2907-compose-up-all
-```
+The `HOCS_DATA_REPO` can be one of :
+* hocs-data
+* hocs-data-wcs
+
+The `HOCS_DATA_ELASTIC_REPO` can be one of :
+* hocs-data-elastic
+* hocs-data-wcs-elastic
 
 ## Data migration
 
