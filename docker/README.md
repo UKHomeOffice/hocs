@@ -3,14 +3,21 @@
 This directory contains configuration for Docker Compose, a quick way to get a
 local HOCS environment on your computer. 
 
+If this is the first time you run it, Compose will download the latest images; this could
+take fifteen minutes, depending on your connection. To relieve pressure on your machines resources, 
+it is better to pull the images first then run up the app 
+
+To pull all services, do:
+```console
+$ docker-compose pull
+```
+
 To start all services, do:
 ```console
 $ docker-compose up
 ```
 
-This might take over five minutes to run.
-The first time you run it Compose will download the latest images; this could
-take an additional fifteen minutes, depending on your connection.
+With Docker using 8GB of memory, this takes approximately 4 minutes to startup.
 
 You can also ask Compose to background the process (detach) once everything is
 up and running:
@@ -23,6 +30,7 @@ To turn the containers off, press CTRL and C at the same time in that terminal
 ```console
 $ docker-compose stop
 ```
+> Note this will retain data in the local database.
 
 If you wish to Stop and remove containers, networks, images, and volumes, run the following:
 ```console
@@ -78,6 +86,10 @@ WORKFLOW_TAG=branch-epic_HOCS-COMP
 CASE_CREATOR_TAG=branch-epic_HOCS-COMP
 INFO_TAG=branch-epic_HOCS-COMP
 HOCS_DATA_TAG=branch-epic_HOCS-COMP
+```
+The syntax of a tag for a feature branch looks like this:
+```shell
+HOCS_DATA_ELASTIC_TAG=branch-feature_HOCS-2907-compose-up-all
 ```
 
 ## Data migration
@@ -187,7 +199,7 @@ headers yourself using (for example) a browser extension. Ask an existing
 developer for their copy. This might manifest itself as a browser timeout:
 check stderr before assuming something else is wrong.
 
-### Search index
+### Manually applying the Search indexes
 
 The search service needs elastic indexes applying. Without them, you will see continuous search errors.
 The search indexes are contained in either hocs-data or hocs-data-wcs. To apply the index, do th following:
