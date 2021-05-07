@@ -112,7 +112,7 @@ services:
         condition: service_healthy
 
   load_elastic:
-    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/${HOCS_DATA_ELASTIC_REPO:-hocs-data-elastic}:${HOCS_DATA_TAG:-branch-main}
+    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/${HOCS_DATA_ELASTIC_REPO:-hocs-data-elastic}:${HOCS_DATA_TAG:-}
     environment:
       ELASTIC_HOST: localstack
     networks:
@@ -122,7 +122,7 @@ services:
         condition: service_healthy
     
   data_migration:
-    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/${HOCS_DATA_REPO:-hocs-data}:${HOCS_DATA_TAG:-branch-main}
+    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/${HOCS_DATA_REPO:-hocs-data}:${HOCS_DATA_TAG:-}
     environment:
       FLYWAY_URL: jdbc:postgresql://postgres:5432/postgres
       FLYWAY_USER: root
@@ -136,7 +136,7 @@ services:
   frontend:
     # health check has been removed because we have no way of testing in docker-compose
     # to perform a health check we would need to add curl or something similar to the container.
-    image: quay.io/ukhomeofficedigital/hocs-frontend:${FRONTEND_TAG:-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-frontend:${FRONTEND_TAG:-}
     ports:
       - 8080:8080
     networks:
@@ -170,7 +170,7 @@ services:
       start_period: 2m
       timeout: 30s
       retries: 3
-    image: quay.io/ukhomeofficedigital/hocs-casework:${CASEWORK_TAG:-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-casework:${CASEWORK_TAG:-}
     ports:
       - 8082:8080
     networks:
@@ -197,7 +197,7 @@ services:
       start_period: 3m
       timeout: 30s
       retries: 3
-    image: quay.io/ukhomeofficedigital/hocs-workflow:${WORKFLOW_TAG:-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-workflow:${WORKFLOW_TAG:-}
     ports:
       - 8091:8080
     networks:
@@ -227,7 +227,7 @@ services:
       start_period: 2m
       timeout: 30s
       retries: 3
-    image: quay.io/ukhomeofficedigital/hocs-audit:${AUDIT_TAG:-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-audit:${AUDIT_TAG:-}
     ports:
       - 8087:8080
     networks:
@@ -252,7 +252,7 @@ services:
       start_period: 1m
       timeout: 30s
       retries: 3
-    image: quay.io/ukhomeofficedigital/hocs-search:${SEARCH_TAG:-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-search:${SEARCH_TAG:-}
     ports:
       - 8088:8080
     networks:
@@ -285,7 +285,7 @@ services:
       start_period: 3m
       timeout: 30s
       retries: 3
-    image: quay.io/ukhomeofficedigital/hocs-info-service:${INFO_TAG:-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-info-service:${INFO_TAG:-}
     ports:
       - 8085:8080
     networks:
@@ -315,7 +315,7 @@ services:
   converter:
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
-    image: quay.io/ukhomeofficedigital/hocs-docs-converter:${DOCS_CONVERTER_TAG:-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-docs-converter:${DOCS_CONVERTER_TAG:-}
     ports:
       - 8084:8080
     networks:
@@ -329,7 +329,7 @@ services:
       start_period: 2m
       timeout: 30s
       retries: 3
-    image: quay.io/ukhomeofficedigital/hocs-docs:${DOCS_TAG:-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-docs:${DOCS_TAG:-}
     ports:
       - 8083:8080
     networks:
@@ -364,7 +364,7 @@ services:
       start_period: 1m
       timeout: 30s
       retries: 3
-    image: quay.io/ukhomeofficedigital/hocs-templates:${TEMPLATES_TAG:-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-templates:${TEMPLATES_TAG:-}
     ports:
       - 8090:8080
     networks:
@@ -376,7 +376,7 @@ services:
       HOCS_SEARCH_SERVICE: 'http://documents:8080'
 
   case_creator:
-    image: quay.io/ukhomeofficedigital/hocs-case-creator:${CASE_CREATOR_TAG:-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-case-creator:${CASE_CREATOR_TAG:-}
     ports:
       - 8092:8080
     networks:
