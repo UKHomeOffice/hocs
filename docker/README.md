@@ -78,7 +78,7 @@ $ docker-compose up
 
 ## Use of .env file
 The docker-compose file has variables for the image tags. This allows the use of a ``.env`` file.
-By default, ``branch-main`` will be used. The following is an example of a file overriding some services :
+By default, ``branch-main`` will be used. The following is an example of a file overriding some services:
 ```shell
 FRONTEND_TAG=branch-epic_HOCS-COMP
 CASEWORK_TAG=branch-epic_HOCS-COMP
@@ -89,21 +89,21 @@ HOCS_DATA_TAG=branch-feature_HOCS-2907-compose-up-all
 HOCS_DATA_REPO=hocs-data
 HOCS_DATA_ELASTIC_REPO=hocs-data-elastic
 ```
-The `HOCS_DATA_REPO` can be one of :
+The `HOCS_DATA_REPO` can be one of:
 * hocs-data
 * hocs-data-wcs
 
-The `HOCS_DATA_ELASTIC_REPO` can be one of :
+The `HOCS_DATA_ELASTIC_REPO` can be one of:
 * hocs-data-elastic
 * hocs-data-wcs-elastic
 
 ## Data migration
 
-The info-service doesn&rsquo;t come with its schema, it relies on a data_migration step in the docker-compose file.
+The info-service doesn&rsquo;t come with its schema. To load the schema it relies on a data_migration step in the docker-compose file.
 
 The data_migration step loads the info schema using flyway scripts.
 
-To select hocs-data pr hocs-data-wcs set the variable ``HOCS_DATA_REPO`` in your ``.env`` file to either :
+To select hocs-data or hocs-data-wcs set the variable ``HOCS_DATA_REPO`` in your ``.env`` file to either:
 * hocs-data (default)
 * hocs-data-wcs
 
@@ -207,7 +207,7 @@ check stderr before assuming something else is wrong.
 ### Manually applying the Search indexes
 
 The search service needs elastic indexes applying. Without them, you will see continuous search errors.
-The search indexes are contained in either hocs-data or hocs-data-wcs. To apply the index, do th following:
+The search indexes are contained in either hocs-data or hocs-data-wcs. To apply the index, do the following:
 ```console
 $ git clone git@github.com:UKHomeOffice/hocs-data.git
 $ cd hocs-data

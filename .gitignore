@@ -1,1 +1,2 @@
-/docker/keycloak/hsperfdata_jboss/*
+/docker/keycloak/hsperfdata_jboss
+.env
