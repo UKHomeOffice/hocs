@@ -112,7 +112,7 @@ services:
         condition: service_healthy
 
   load_elastic:
-    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/${HOCS_DATA_ELASTIC_REPO:-latesthocs-data-elastic}:${HOCS_DATA_TAG:-latest}
+    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/${HOCS_DATA_ELASTIC_REPO:-hocs-data-elastic}:${HOCS_DATA_TAG:-latest}
     environment:
       ELASTIC_HOST: localstack
     networks:
@@ -122,7 +122,7 @@ services:
         condition: service_healthy
     
   data_migration:
-    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/${HOCS_DATA_REPO:-latesthocs-data}:${HOCS_DATA_TAG:-latest}
+    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/${HOCS_DATA_REPO:-hocs-data}:${HOCS_DATA_TAG:-latest}
     environment:
       FLYWAY_URL: jdbc:postgresql://postgres:5432/postgres
       FLYWAY_USER: root
