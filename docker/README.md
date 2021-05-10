@@ -4,7 +4,7 @@ This directory contains configuration for Docker Compose, a quick way to get a
 local HOCS environment on your computer. 
 
 If this is the first time you run it, Compose will download the latest images; this could
-take fifteen minutes, depending on your connection. To relieve pressure on your machines resources, 
+take fifteen minutes, depending on your connection. To relieve pressure on your machine&rsquo;s resources, 
 it is better to pull the images first then run up the app 
 
 To pull all services, do:
@@ -78,7 +78,7 @@ $ docker-compose up
 
 ## Use of .env file
 The docker-compose file has variables for the image tags. This allows the use of a ``.env`` file.
-By default, ``branch-main`` will be used. The following is an example of a file overriding some services:
+By default, ``latest`` will be used. The following is an example of a file overriding some services:
 ```shell
 FRONTEND_TAG=branch-epic_HOCS-COMP
 CASEWORK_TAG=branch-epic_HOCS-COMP
@@ -116,7 +116,7 @@ $ $(aws ecr get-login --no-include-email --profile acp-ecr)
 To be able to pull the image you need to be in authorised to do so.
 This is in the ACP Hub in the Docker repos section.
 
-The AWS credentials are stored in the hub, under your "Connected Identities" section.
+AWS credentials are stored in the ACP hub, under your &ldquo;Connected Identities&rdquo; section.
 
 ## Manual data import
 
