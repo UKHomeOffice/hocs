@@ -19,34 +19,24 @@ services:
     tmpfs:
       - /var/lib/postgresql
 
-  clamd:
-    healthcheck:
-      test: [ "CMD", "./check.sh" ]
-      start_period: 2m
-    image: mkodockx/docker-clamav:buster-slim
-    ports:
-      - "3310:3310/tcp"
-    networks:
-      - hocs-network
-
   clamav:
-    healthcheck:
-      # -f makes curl exit with 22 on error (it doesn't normally)
-      test: [ "CMD", "curl", "-f", "http://localhost:8080" ]
-    image: lokori/clamav-rest
-    environment:
-      - CLAMD_HOST=clamd
+    # Use a mockserver instead of bloated clamav 
+    image: mockserver/mockserver:mockserver-5.11.1
+    command: -logLevel INFO -serverPort 8080
     ports:
       - 8086:8080
     networks:
       - hocs-network
-    depends_on:
-      clamd:
-        condition: service_healthy
-
+    environment:
+      MOCKSERVER_PROPERTY_FILE: /config/mockserver.json
+      MOCKSERVER_INITIALIZATION_JSON_PATH: /config/mockserver.json
+    volumes:
+      - ${PWD}/clamav_mock:/config
+        
   keycloak:
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/auth" ]
+      start_period: 1m
     image: jboss/keycloak:5.0.0
     restart: always
     ports:
@@ -64,16 +54,10 @@ services:
 
   localstack:
     healthcheck:
-      test:
-        - CMD
-        - bash
-        - -c
-        - awslocal es list-domain-names
-          && awslocal s3 ls
-          && awslocal sqs list-queues
-      interval: 5s
-      timeout: 10s
-      start_period: 90s
+      test: "bash -c 'AWS_ACCESS_KEY_ID=fake AWS_SECRET_ACCESS_KEY=fake aws --endpoint-url=http://localhost:4572 s3 ls'"
+      start_period: 1m
+      timeout: 30s
+      retries: 3
     image: localstack/localstack:0.9.5
     ports:
       - 9000:8080
@@ -87,7 +71,7 @@ services:
     environment:
       HOSTNAME_EXTERNAL: localstack
       DEFAULT_REGION: eu-west-2
-      SERVICES: sqs,s3,sns,es
+      SERVICES: sqs,sns,es,s3
 
   aws_cli:
     image: xueshanf/awscli
@@ -127,10 +111,35 @@ services:
       localstack:
         condition: service_healthy
 
+  load_elastic:
+    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/${HOCS_DATA_ELASTIC_REPO:-hocs-data-elastic}:${HOCS_DATA_TAG:-latest}
+    environment:
+      ELASTIC_HOST: localstack
+    networks:
+      - hocs-network
+    depends_on:
+      localstack:
+        condition: service_healthy
+    
+  data_migration:
+    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/${HOCS_DATA_REPO:-hocs-data}:${HOCS_DATA_TAG:-latest}
+    environment:
+      FLYWAY_URL: jdbc:postgresql://postgres:5432/postgres
+      FLYWAY_USER: root
+      FLYWAY_PASSWORD: dev
+    networks:
+      - hocs-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+
   frontend:
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
-    image: quay.io/ukhomeofficedigital/hocs-frontend:${FRONTEND_TAG:-branch-main}
+      test: [ "CMD", "wget", "-qo", "/dev/null",  "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+    image: quay.io/ukhomeofficedigital/hocs-frontend:${FRONTEND_TAG:-latest}
     ports:
       - 8080:8080
     networks:
@@ -161,8 +170,10 @@ services:
   casework:
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
-      start_period: 240s
-    image: quay.io/ukhomeofficedigital/hocs-casework:${CASEWORK_TAG:-branch-main}
+      start_period: 2m
+      timeout: 30s
+      retries: 3
+    image: quay.io/ukhomeofficedigital/hocs-casework:${CASEWORK_TAG:-latest}
     ports:
       - 8082:8080
     networks:
@@ -186,13 +197,16 @@ services:
   workflow:
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
-      start_period: 240s
-    image: quay.io/ukhomeofficedigital/hocs-workflow:${WORKFLOW_TAG:-branch-main}
+      start_period: 3m
+      timeout: 30s
+      retries: 3
+    image: quay.io/ukhomeofficedigital/hocs-workflow:${WORKFLOW_TAG:-latest}
     ports:
       - 8091:8080
     networks:
       - hocs-network
     environment:
+      JAVA_OPTS: '-Xms1536M -Xmx2G'
       SPRING_PROFILES_ACTIVE: 'development, local'
       SERVER_PORT: 8080
       CASE_QUEUE_NAME: 'case-queue'
@@ -209,22 +223,14 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      localstack:
-        condition: service_healthy # this waits until healthcheck passes
-      aws_cli:
-        condition: service_started # this doesn't
-      casework:
-        condition: service_healthy
-      documents:
-        condition: service_healthy
-      info:
-        condition: service_healthy
 
   audit:
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
-      start_period: 60s
-    image: quay.io/ukhomeofficedigital/hocs-audit:${AUDIT_TAG:-branch-main}
+      start_period: 2m
+      timeout: 30s
+      retries: 3
+    image: quay.io/ukhomeofficedigital/hocs-audit:${AUDIT_TAG:-latest}
     ports:
       - 8087:8080
     networks:
@@ -246,8 +252,10 @@ services:
   search:
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
-      start_period: 180s
-    image: quay.io/ukhomeofficedigital/hocs-search:${SEARCH_TAG:-branch-main}
+      start_period: 1m
+      timeout: 30s
+      retries: 3
+    image: quay.io/ukhomeofficedigital/hocs-search:${SEARCH_TAG:-latest}
     ports:
       - 8088:8080
     networks:
@@ -277,7 +285,10 @@ services:
   info:
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
-    image: quay.io/ukhomeofficedigital/hocs-info-service:${INFO_TAG:-branch-main}
+      start_period: 3m
+      timeout: 30s
+      retries: 3
+    image: quay.io/ukhomeofficedigital/hocs-info-service:${INFO_TAG:-latest}
     ports:
       - 8085:8080
     networks:
@@ -297,16 +308,17 @@ services:
       AUDIT_QUEUE_DLQ_NAME: 'audit-queue-dlq'
       HOCS_AUDIT_SERVICE: 'http://audit:8080'
     depends_on:
-      postgres:
-        condition: service_healthy
-      localstack:
-        condition: service_healthy
       aws_cli:
         condition: service_started
+      data_migration:
+        condition: service_started
+      keycloak:
+        condition: service_started
+  
   converter:
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
-    image: quay.io/ukhomeofficedigital/hocs-docs-converter:${DOCS_CONVERTER_TAG:-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-docs-converter:${DOCS_CONVERTER_TAG:-latest}
     ports:
       - 8084:8080
     networks:
@@ -317,8 +329,10 @@ services:
   documents:
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
-      start_period: 90s
-    image: quay.io/ukhomeofficedigital/hocs-docs:${DOCS_TAG:-branch-main}
+      start_period: 2m
+      timeout: 30s
+      retries: 3
+    image: quay.io/ukhomeofficedigital/hocs-docs:${DOCS_TAG:-latest}
     ports:
       - 8083:8080
     networks:
@@ -338,8 +352,6 @@ services:
       DB_HOST: 'postgres'
       AWS_LOCAL_HOST: 'localstack'
     depends_on:
-      clamav:
-        condition: service_healthy
       postgres:
         condition: service_healthy
       localstack:
@@ -352,7 +364,10 @@ services:
   templates:
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
-    image: quay.io/ukhomeofficedigital/hocs-templates:${TEMPLATES_TAG:-branch-main}
+      start_period: 1m
+      timeout: 30s
+      retries: 3
+    image: quay.io/ukhomeofficedigital/hocs-templates:${TEMPLATES_TAG:-latest}
     ports:
       - 8090:8080
     networks:
@@ -362,19 +377,9 @@ services:
       HOCS_INFO_SERVICE: 'http://info:8080'
       HOCS_AUDITSERVICE: 'http://casework:8080'
       HOCS_SEARCH_SERVICE: 'http://documents:8080'
-    depends_on:
-      info:
-        condition: service_healthy
-      audit:
-        condition: service_healthy
-      documents:
-        condition: service_healthy
 
   case_creator:
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
-      start_period: 90s
-    image: quay.io/ukhomeofficedigital/hocs-case-creator:${CASE_CREATOR_TAG:-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-case-creator:${CASE_CREATOR_TAG:-latest}
     ports:
       - 8092:8080
     networks:
@@ -389,7 +394,7 @@ services:
       CASE_CREATOR_CASE_SERVICE: http://casework:8080
       CASE_CREATOR_BASICAUTH: 'UNSET'
       CASE_CREATOR_UKVI_COMPLAINT_USER: '04167856-f772-4bca-87b9-f8b6739853b7'
-      CASE_CREATOR_UKVI_COMPLAINT_GROUP: '/CMS_CCH_zqxmzQ6iGEkTRw'
+      CASE_CREATOR_UKVI_COMPLAINT_GROUP: '/COMP_REG_bdhvyvn6fskcg'
       CASE_CREATOR_SQS_ACCESS_KEY: '1234'
       CASE_CREATOR_SQS_SECRET_KEY: '1234'
       CASE_CREATOR_UKVI_COMPLAINT_QUEUE_NAME: 'ukvi-complaint-queue'
@@ -401,8 +406,6 @@ services:
       DOCUMENT_S3_SECRET_KEY: '1234'
       DOCUMENT_S3_UNTRUSTED_BUCKET_NAME: 'untrusted-bucket'
     depends_on:
-      localstack:
-        condition: service_healthy
       aws_cli:
         condition: service_started
 
