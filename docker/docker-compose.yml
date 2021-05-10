@@ -134,8 +134,11 @@ services:
         condition: service_healthy
 
   frontend:
-    # health check has been removed because we have no way of testing in docker-compose
-    # to perform a health check we would need to add curl or something similar to the container.
+    healthcheck:
+      test: [ "CMD", "wget", "-qo", "/dev/null",  "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
     image: quay.io/ukhomeofficedigital/hocs-frontend:${FRONTEND_TAG:-latest}
     ports:
       - 8080:8080
