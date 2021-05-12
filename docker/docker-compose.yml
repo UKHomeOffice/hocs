@@ -74,16 +74,18 @@ services:
       SERVICES: sqs,sns,es,s3
 
   aws_cli:
+    healthcheck:
+      test: "bash -c 'AWS_ACCESS_KEY_ID=fake AWS_SECRET_ACCESS_KEY=fake aws --endpoint-url=http://localstack:4572 s3 ls s3://trusted-bucket'"
+      start_period: 1m
+      timeout: 10s
+      retries: 3
     image: xueshanf/awscli
     # The sleep 8h at the end of this command is to keep aws_cli running. Without it, this step can get run multiple times.
     command:
       - /bin/sh
       - -c
       - |
-        sleep 30
         aws --version
-        aws --endpoint-url=http://localstack:4572 s3 mb s3://untrusted-bucket
-        aws --endpoint-url=http://localstack:4572 s3 mb s3://trusted-bucket
         aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name document-queue
         aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name document-queue-dlq
         aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name audit-queue
@@ -100,6 +102,8 @@ services:
         aws --endpoint-url=http://localstack:4575 sns list-subscriptions
         aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name ukvi-complaint-queue
         aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name ukvi-complaint-queue-dlq
+        aws --endpoint-url=http://localstack:4572 s3 mb s3://untrusted-bucket
+        aws --endpoint-url=http://localstack:4572 s3 mb s3://trusted-bucket
         sleep 8h
     environment:
       AWS_ACCESS_KEY_ID: UNSET
@@ -393,8 +397,9 @@ services:
       CASE_CREATOR_WORKFLOW_SERVICE: http://workflow:8080
       CASE_CREATOR_CASE_SERVICE: http://casework:8080
       CASE_CREATOR_BASICAUTH: 'UNSET'
-      CASE_CREATOR_UKVI_COMPLAINT_USER: '04167856-f772-4bca-87b9-f8b6739853b7'
-      CASE_CREATOR_UKVI_COMPLAINT_GROUP: '/COMP_REG_bdhvyvn6fskcg'
+      CASE_CREATOR_UKVI_COMPLAINT_USER: '22ca514d-c205-47a0-9e38-68daee4c1299'
+      CASE_CREATOR_UKVI_COMPLAINT_TEAM: '08e30ffc-2087-ff3a-b19b-343a88491347'
+      CASE_CREATOR_UKVI_COMPLAINT_GROUP: '/COMP_CCH_zqxmzQ6iEkTRw'
       CASE_CREATOR_SQS_ACCESS_KEY: '1234'
       CASE_CREATOR_SQS_SECRET_KEY: '1234'
       CASE_CREATOR_UKVI_COMPLAINT_QUEUE_NAME: 'ukvi-complaint-queue'
@@ -407,7 +412,7 @@ services:
       DOCUMENT_S3_UNTRUSTED_BUCKET_NAME: 'untrusted-bucket'
     depends_on:
       aws_cli:
-        condition: service_started
+        condition: service_healthy
 
 networks:
   hocs-network:
