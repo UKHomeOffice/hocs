@@ -406,6 +406,33 @@
       },
       "notBefore" : 0,
       "groups" : [ "/EREREREREREREREREREREQ" ]
+    }, {
+      "id" : "22ca514d-c205-47a0-9e38-68daee4c1299",
+      "createdTimestamp" : 1544174692718,
+      "username" : "ukvi-case-creator@homeoffice.gov.uk",
+      "enabled" : true,
+      "totp" : false,
+      "emailVerified" : false,
+      "credentials" : [ {
+        "type" : "password",
+        "hashedSaltedValue" : "K4oQart6CT7BdeQyZgkgcDc0d+jEIHVqpxVqjq7H1UkAM1kcXQkJtM/kiBw3J6LyT3MkX/IbO86rUL7mSlDJqw==",
+        "salt" : "rhZ0BnXWH2ZqEE/2gASL6Q==",
+        "hashIterations" : 27500,
+        "counter" : 0,
+        "algorithm" : "pbkdf2-sha256",
+        "digits" : 0,
+        "period" : 0,
+        "createdDate" : 1541624862203,
+        "config" : { }
+      } ],
+      "disableableCredentialTypes" : [ ],
+      "requiredActions" : [ ],
+      "realmRoles" : [ "offline_access", "uma_authorization" ],
+      "clientRoles" : {
+        "account" : [ "view-profile", "manage-account" ]
+      },
+      "notBefore" : 0,
+      "groups" : [ "/EREREREREREREREREREREQ" ]
     }
   ],
   "scopeMappings" : [ {
