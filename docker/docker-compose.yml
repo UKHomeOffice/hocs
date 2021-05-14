@@ -137,6 +137,15 @@ services:
       postgres:
         condition: service_healthy
 
+  refresh_members:
+    image: curlimages/curl:7.76.1
+    command: [ "http://info:8080/admin/member/refresh" ]
+    networks:
+      - hocs-network
+    depends_on:
+      info:
+        condition: service_healthy
+
   frontend:
     healthcheck:
       test: [ "CMD", "wget", "-qo", "/dev/null",  "http://localhost:8080/health"]
