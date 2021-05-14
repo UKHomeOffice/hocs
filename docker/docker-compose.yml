@@ -20,7 +20,7 @@ services:
       - /var/lib/postgresql
 
   clamav:
-    # Use a mockserver instead of bloated clamav 
+    # Use a mockserver instead of bloated clamav
     image: mockserver/mockserver:mockserver-5.11.1
     command: -logLevel INFO -serverPort 8080
     ports:
@@ -32,7 +32,7 @@ services:
       MOCKSERVER_INITIALIZATION_JSON_PATH: /config/mockserver.json
     volumes:
       - ${PWD}/clamav_mock:/config
-        
+
   keycloak:
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/auth" ]
@@ -124,7 +124,7 @@ services:
     depends_on:
       localstack:
         condition: service_healthy
-    
+
   data_migration:
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/${HOCS_DATA_REPO:-hocs-data}:${HOCS_DATA_TAG:-latest}
     environment:
@@ -135,6 +135,15 @@ services:
       - hocs-network
     depends_on:
       postgres:
+        condition: service_healthy
+
+  refresh_members:
+    image: curlimages/curl:7.76.1
+    command: [ "http://info:8080/admin/member/refresh" ]
+    networks:
+      - hocs-network
+    depends_on:
+      info:
         condition: service_healthy
 
   frontend:
@@ -318,7 +327,7 @@ services:
         condition: service_started
       keycloak:
         condition: service_started
-  
+
   converter:
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
