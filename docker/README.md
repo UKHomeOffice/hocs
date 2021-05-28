@@ -34,7 +34,7 @@ $ docker-compose stop
 
 If you wish to Stop and remove containers, networks, images, and volumes, run the following:
 ```console
-$ docker-compose down
+$ docker-compose down -v
 ```
 > Note this will remove the local database and all its data.
 
