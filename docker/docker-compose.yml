@@ -162,7 +162,7 @@ services:
       CASEWORK_SERVICE: http://casework:8080
       INFO_SERVICE: http://info:8080
       DOCUMENT_SERVICE: http://documents:8080
-      ALLOWED_FILE_EXTENSIONS: 'txt,doc,docx'
+      ALLOWED_FILE_EXTENSIONS: "doc,docx,txt,rtf,html,pdf,jpg,jpeg,tif,tiff,png,bmp,gif,xls,xlsx,msg"
       DOCUMENT_BULK_LIMIT: 40
       VALID_DAYS_RANGE: 180
       S3_BUCKET: "untrusted-bucket"
