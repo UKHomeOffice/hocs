@@ -181,13 +181,13 @@ services:
 
   management-ui:
     healthcheck:
-      test: ["CMD", "wget", "-qo", "/dev/null", "http://localhost:8099/health"]
+      test: ["CMD", "wget", "-qo", "/dev/null", "http://localhost:8080/health"]
       interval: 10s
       timeout: 10s
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-management-ui:${MANAGEMENT_UI_TAG:-latest}
     ports:
-      - 8099:8099
+      - 8099:8080
     networks:
       - hocs-network
     environment:
@@ -197,7 +197,7 @@ services:
       INFO_SERVICE: http://info:8080
       DOCUMENT_SERVICE: http://documents:8080
       ALLOWED_FILE_EXTENSIONS: "doc,docx,txt,rtf,html,pdf,jpg,jpeg,tif,tiff,png,bmp,gif,xls,xlsx,msg"
-      S3_BUCKET: "untrusted-bucket"
+      PORT: 8080
       S3_ENDPOINT: http://localstack:4572
       DEFAULT_TIMEOUT_SECONDS: 300
       COUNTDOWN_FOR_SECONDS: 60
