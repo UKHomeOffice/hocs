@@ -192,19 +192,12 @@ services:
       - hocs-network
     environment:
       USE_CLIENTSIDE: "true"
-      WORKFLOW_SERVICE: http://workflow:8080
       CASEWORK_SERVICE: http://casework:8080
       INFO_SERVICE: http://info:8080
       DOCUMENT_SERVICE: http://documents:8080
       ALLOWED_FILE_EXTENSIONS: "doc,docx,txt,rtf,html,pdf,jpg,jpeg,tif,tiff,png,bmp,gif,xls,xlsx,msg"
       PORT: 8080
-      S3_ENDPOINT: http://localstack:4572
-      DEFAULT_TIMEOUT_SECONDS: 300
-      COUNTDOWN_FOR_SECONDS: 60
-      MAX_UPLOAD_SIZE: 52428800
     depends_on:
-      workflow:
-        condition: service_healthy
       casework:
         condition: service_healthy
       info:
@@ -212,6 +205,8 @@ services:
       documents:
         condition: service_healthy
       localstack:
+        condition: service_healthy
+      aws_cli:
         condition: service_healthy
 
   casework:
