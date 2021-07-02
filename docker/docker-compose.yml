@@ -209,7 +209,7 @@ services:
 
   workflow:
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
+      test: [ "CMD", "java", "/app/scripts/HealthCheck.java" , "||", "exit", "1"]
       start_period: 3m
       timeout: 30s
       retries: 3
