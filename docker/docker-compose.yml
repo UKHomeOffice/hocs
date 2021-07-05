@@ -346,6 +346,7 @@ services:
       HOCS_CASE_SERVICE: "http://casework:8080"
       HOCS_DOCUMENT_SERVICE: "http://documents:8080"
       KEYCLOAK_SERVER_ROOT: "http://keycloak:8080"
+      AWS_LOCAL_HOST: "localstack"
       AUDIT_QUEUE_NAME: "audit-queue"
       AUDIT_QUEUE_DLQ_NAME: "audit-queue-dlq"
       HOCS_AUDIT_SERVICE: "http://audit:8080"
