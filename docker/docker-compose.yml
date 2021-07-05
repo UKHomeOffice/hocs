@@ -215,7 +215,7 @@ services:
       start_period: 2m
       timeout: 30s
       retries: 3
-    image: caseworklocal
+    image: quay.io/ukhomeofficedigital/hocs-workflow:${WORKFLOW_TAG:-latest}
     ports:
       - 8082:8080
     networks:
@@ -268,7 +268,7 @@ services:
 
   audit:
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: ["CMD", "java", "/app/scripts/HealthCheck.java" , "||", "exit", "1"]
       start_period: 2m
       timeout: 30s
       retries: 3
@@ -293,7 +293,7 @@ services:
 
   search:
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: ["CMD", "java", "/app/scripts/HealthCheck.java" , "||", "exit", "1"]
       start_period: 1m
       timeout: 30s
       retries: 3
@@ -326,7 +326,7 @@ services:
 
   info:
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: ["CMD", "java", "/app/scripts/HealthCheck.java" , "||", "exit", "1"]
       start_period: 3m
       timeout: 30s
       retries: 3
@@ -370,7 +370,7 @@ services:
 
   documents:
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: ["CMD", "java", "/app/scripts/HealthCheck.java" , "||", "exit", "1"]
       start_period: 2m
       timeout: 30s
       retries: 3
@@ -405,7 +405,7 @@ services:
 
   templates:
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: ["CMD", "java", "/app/scripts/HealthCheck.java" , "||", "exit", "1"]
       start_period: 1m
       timeout: 30s
       retries: 3
@@ -421,6 +421,11 @@ services:
       HOCS_SEARCH_SERVICE: "http://documents:8080"
 
   case_creator:
+    healthcheck:
+      test: ["CMD", "java", "/app/scripts/HealthCheck.java" , "||", "exit", "1"]
+      start_period: 1m
+      timeout: 30s
+      retries: 3
     image: quay.io/ukhomeofficedigital/hocs-case-creator:${CASE_CREATOR_TAG:-latest}
     ports:
       - 8092:8080
