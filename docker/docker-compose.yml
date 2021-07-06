@@ -421,11 +421,6 @@ services:
       HOCS_SEARCH_SERVICE: "http://documents:8080"
 
   case_creator:
-    healthcheck:
-      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
-      start_period: 1m
-      timeout: 30s
-      retries: 3
     image: quay.io/ukhomeofficedigital/hocs-case-creator:${CASE_CREATOR_TAG:-latest}
     ports:
       - 8092:8080
