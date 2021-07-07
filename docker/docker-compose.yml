@@ -211,7 +211,7 @@ services:
 
   casework:
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
       start_period: 2m
       timeout: 30s
       retries: 3
@@ -238,7 +238,7 @@ services:
 
   workflow:
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
       start_period: 3m
       timeout: 30s
       retries: 3
@@ -268,7 +268,7 @@ services:
 
   audit:
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
       start_period: 2m
       timeout: 30s
       retries: 3
@@ -293,7 +293,7 @@ services:
 
   search:
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
       start_period: 1m
       timeout: 30s
       retries: 3
@@ -326,7 +326,7 @@ services:
 
   info:
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
       start_period: 3m
       timeout: 30s
       retries: 3
@@ -371,7 +371,7 @@ services:
 
   documents:
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
       start_period: 2m
       timeout: 30s
       retries: 3
@@ -406,7 +406,7 @@ services:
 
   templates:
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
       start_period: 1m
       timeout: 30s
       retries: 3
