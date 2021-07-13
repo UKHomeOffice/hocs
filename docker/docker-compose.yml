@@ -357,7 +357,39 @@ services:
         condition: service_started
       keycloak:
         condition: service_started
+      notify:
+        condition: service_started
 
+  notify:
+    healthcheck:
+      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
+      start_period: 3m
+      timeout: 30s
+      retries: 3
+    image: quay.io/ukhomeofficedigital/hocs-notify:${INFO_TAG:-latest}
+    ports:
+      - 8089:8080
+    networks:
+      - hocs-network
+    environment:
+      SPRING_PROFILES_ACTIVE: "development, local"
+      SERVER_PORT: 8080
+      DB_HOST: "postgres"
+      HOCS_CASE_SERVICE: "http://casework:8080"
+      HOCS_DOCUMENT_SERVICE: "http://documents:8080"
+      KEYCLOAK_SERVER_ROOT: "http://keycloak:8080"
+      AWS_LOCAL_HOST: "localstack"
+      AUDIT_QUEUE_NAME: "audit-queue"
+      AUDIT_QUEUE_DLQ_NAME: "audit-queue-dlq"
+      HOCS_AUDIT_SERVICE: "http://audit:8080"
+    depends_on:
+      aws_cli:
+        condition: service_started
+      data_migration:
+        condition: service_started
+      keycloak:
+        condition: service_started
+    
   converter:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
