@@ -370,7 +370,7 @@ services:
       start_period: 3m
       timeout: 30s
       retries: 3
-    image: quay.io/ukhomeofficedigital/hocs-notify:${INFO_TAG:-latest}
+    image: quay.io/ukhomeofficedigital/hocs-notify:${NOTIFY_TAG:-latest}
     ports:
       - 8089:8080
     networks:
