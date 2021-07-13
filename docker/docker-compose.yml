@@ -225,6 +225,8 @@ services:
       SERVER_PORT: 8080
       DB_HOST: "postgres"
       AWS_LOCAL_HOST: "localstack"
+      NOTIFY_QUEUE_NAME: "notify-queue"
+      NOTIFY_QUEUE_DLQ_NAME: "notify-queue-dlq"
       HOCS_INFO_SERVICE: "http://info:8080"
       HOCS_AUDITSERVICE: "http://audit:8080"
       HOCS_SEARCH_SERVICE: "http://search:8080"
@@ -343,6 +345,8 @@ services:
       CASE_QUEUE_DLQ_NAME: "case-queue-dlq"
       DOCS_QUEUE_NAME: "document-queue"
       DOCS_QUEUE_DLQ_NAME: "document-queue-dlq"
+      NOTIFY_QUEUE_NAME: "notify-queue"
+      NOTIFY_QUEUE_DLQ_NAME: "notify-queue-dlq"
       HOCS_CASE_SERVICE: "http://casework:8080"
       HOCS_DOCUMENT_SERVICE: "http://documents:8080"
       KEYCLOAK_SERVER_ROOT: "http://keycloak:8080"
@@ -374,14 +378,12 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: "development, local"
       SERVER_PORT: 8080
-      DB_HOST: "postgres"
-      HOCS_CASE_SERVICE: "http://casework:8080"
-      HOCS_DOCUMENT_SERVICE: "http://documents:8080"
       KEYCLOAK_SERVER_ROOT: "http://keycloak:8080"
       AWS_LOCAL_HOST: "localstack"
-      AUDIT_QUEUE_NAME: "audit-queue"
-      AUDIT_QUEUE_DLQ_NAME: "audit-queue-dlq"
-      HOCS_AUDIT_SERVICE: "http://audit:8080"
+      HOCS_INFO_SERVICE: "http://info:8080"
+      NOTIFY_QUEUE_NAME: "notify-queue"
+      NOTIFY_QUEUE_DLQ_NAME: "notify-queue-dlq"
+      NOTIFY_API_KEY: "aaaaaaaaaa-11111111-1111-1111-1111-111111111111-11111111-1111-1111-aaaa-aaaaaaaaaaaa"
     depends_on:
       aws_cli:
         condition: service_started
