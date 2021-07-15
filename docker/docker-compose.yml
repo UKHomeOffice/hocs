@@ -466,8 +466,8 @@ services:
       - hocs-network
     environment:
       DB_HOST: "postgres"
-      CAMUNDA_USERNAME: "admin"
-      CAMUNDA_PASSWORD: "admin"
+      CAMUNDA_ADMIN_USERNAME: "admin"
+      CAMUNDA_ADMIN_PASSWORD: "admin"
     depends_on:
       workflow:
         condition: service_healthy
