@@ -453,5 +453,24 @@ services:
       aws_cli:
         condition: service_healthy
 
+  camunda-tools:
+    healthcheck:
+      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
+      start_period: 1m
+      timeout: 30s
+      retries: 3
+    image: quay.io/ukhomeofficedigital/hocs-camunda-tools:0.0.2
+    ports:
+      - 8093:8080
+    networks:
+      - hocs-network
+    environment:
+      DB_HOST: "postgres"
+      CAMUNDA_USERNAME: "admin"
+      CAMUNDA_PASSWORD: "admin"
+    depends_on:
+      workflow:
+        condition: service_healthy
+
 networks:
   hocs-network:
