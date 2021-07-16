@@ -459,7 +459,7 @@ services:
       start_period: 1m
       timeout: 30s
       retries: 3
-    image: quay.io/ukhomeofficedigital/hocs-camunda-tools:0.0.2
+    image: quay.io/ukhomeofficedigital/hocs-camunda-tools:0.0.3
     ports:
       - 8093:8080
     networks:
