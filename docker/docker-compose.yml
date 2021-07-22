@@ -225,6 +225,8 @@ services:
       SERVER_PORT: 8080
       DB_HOST: "postgres"
       AWS_LOCAL_HOST: "localstack"
+      NOTIFY_QUEUE_NAME: "notify-queue"
+      NOTIFY_QUEUE_DLQ_NAME: "notify-queue-dlq"
       HOCS_INFO_SERVICE: "http://info:8080"
       HOCS_AUDITSERVICE: "http://audit:8080"
       HOCS_SEARCH_SERVICE: "http://search:8080"
@@ -343,6 +345,8 @@ services:
       CASE_QUEUE_DLQ_NAME: "case-queue-dlq"
       DOCS_QUEUE_NAME: "document-queue"
       DOCS_QUEUE_DLQ_NAME: "document-queue-dlq"
+      NOTIFY_QUEUE_NAME: "notify-queue"
+      NOTIFY_QUEUE_DLQ_NAME: "notify-queue-dlq"
       HOCS_CASE_SERVICE: "http://casework:8080"
       HOCS_DOCUMENT_SERVICE: "http://documents:8080"
       KEYCLOAK_SERVER_ROOT: "http://keycloak:8080"
@@ -357,7 +361,37 @@ services:
         condition: service_started
       keycloak:
         condition: service_started
+      notify:
+        condition: service_started
 
+  notify:
+    healthcheck:
+      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
+      start_period: 3m
+      timeout: 30s
+      retries: 3
+    image: quay.io/ukhomeofficedigital/hocs-notify:${NOTIFY_TAG:-latest}
+    ports:
+      - 8089:8080
+    networks:
+      - hocs-network
+    environment:
+      SPRING_PROFILES_ACTIVE: "development, local"
+      SERVER_PORT: 8080
+      KEYCLOAK_SERVER_ROOT: "http://keycloak:8080"
+      AWS_LOCAL_HOST: "localstack"
+      HOCS_INFO_SERVICE: "http://info:8080"
+      NOTIFY_QUEUE_NAME: "notify-queue"
+      NOTIFY_QUEUE_DLQ_NAME: "notify-queue-dlq"
+      NOTIFY_API_KEY: "aaaaaaaaaa-11111111-1111-1111-1111-111111111111-11111111-1111-1111-aaaa-aaaaaaaaaaaa"
+    depends_on:
+      aws_cli:
+        condition: service_started
+      data_migration:
+        condition: service_started
+      keycloak:
+        condition: service_started
+    
   converter:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
