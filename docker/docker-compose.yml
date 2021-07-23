@@ -277,7 +277,7 @@ services:
       start_period: 2m
       timeout: 30s
       retries: 3
-    image: 3387_audit
+    image: quay.io/ukhomeofficedigital/hocs-audit:${AUDIT_TAG:-latest}
     ports:
       - 8087:8080
       - 7087:8000
