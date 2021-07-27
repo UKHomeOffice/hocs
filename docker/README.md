@@ -220,3 +220,8 @@ $ git clone git@github.com:UKHomeOffice/hocs-data.git
 $ cd hocs-data
 $ curl -X PUT http://127.0.0.1:4571/local-case -H "Content-Type: application/json" -d @ElasticSearch/elastic_mapping
 ```
+
+### Remote debug
+The SpringBoot applications expose a remote debug endpoint. The debug port number follows the pattern of the real app port but with a leading 7 instead of an 8.
+E.g., for casework (normal port 8082), use 7082 to connect to the debug port.
+To enable this just create a "Remote JVM Debug" run configuration. Use localhost and the 70 range port that you wish to debug.
