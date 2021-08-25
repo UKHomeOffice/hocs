@@ -11,6 +11,31 @@ environment:
   DOCKER_HOST: tcp://docker:2375
 
 steps:
+  
+- name: pull data_migration
+  image: quay.io/ukhomeofficedigital/dind-awscli
+  environment:
+    AWS_ACCESS_KEY_ID:
+      from_secret: migration_aws_access_key_id
+    AWS_SECRET_ACCESS_KEY:
+      from_secret: migration_aws_secret_access_key
+    AWS_DEFAULT_REGION: eu-west-2
+  commands:
+    - $(aws ecr get-login --no-include-email)
+    - docker pull 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/hocs-data
+
+- name: pull load_elastic
+  image: quay.io/ukhomeofficedigital/dind-awscli
+  environment:
+    AWS_ACCESS_KEY_ID:
+      from_secret: elastic_aws_access_key_id
+    AWS_SECRET_ACCESS_KEY:
+      from_secret: elastic_aws_secret_access_key
+    AWS_DEFAULT_REGION: eu-west-2
+  commands:
+    - $(aws ecr get-login --no-include-email)
+    - docker pull 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/hocs-data-elastic
+
 - name: lint docker-compose
   image: docker/compose
   commands:
@@ -21,7 +46,8 @@ steps:
   commands:
     - docker-compose -f docker/docker-compose.yml up
   depends_on:
-    - lint docker-compose
+    - pull data_migration
+    - pull load_elastic
 
 - name: docker-compose down
   image: docker/compose
