@@ -32,6 +32,9 @@ steps:
       - $(aws ecr get-login --no-include-email)
       - docker pull 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/hocs-data-elastic
 
+environment:
+  DOCKER_HOST: tcp://docker:2375 # needed by dind-awscli
+
 trigger:
   event:
     - push
