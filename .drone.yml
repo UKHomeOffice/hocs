@@ -31,6 +31,8 @@ steps:
       event:
         - promote
         - cron
+      cron:
+        - afternoon
 
   - name: pull_load_elastic
     image: quay.io/ukhomeofficedigital/dind-awscli
@@ -47,6 +49,8 @@ steps:
       event:
         - promote
         - cron
+      cron:
+        - afternoon
 
   - name: compose_up
     image: docker/compose
@@ -62,6 +66,8 @@ steps:
       event:
         - promote
         - cron
+      cron:
+        - afternoon
 
   - name: integration_test
     image: busybox
@@ -73,6 +79,8 @@ steps:
       event:
         - promote
         - cron
+      cron:
+        - afternoon
 
   - name: compose_down
     image: docker/compose
@@ -85,6 +93,8 @@ steps:
       event:
         - promote
         - cron
+      cron:
+        - afternoon
 
 environment:
   DOCKER_HOST: tcp://docker:2375 # needed by dind-awscli
