@@ -5,10 +5,7 @@ name: hocs
 
 services:
   - name: docker
-    image: quay.io/ukhomeofficedigital/dind
-    volumes:
-      - name: dockersock
-        path: /var/run
+    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
 
 environment:
   DOCKER_HOST: tcp://docker:2375
@@ -16,9 +13,6 @@ environment:
 steps:
   - name: wait_for_docker
     image: docker
-    volumes:
-      - name: dockersock
-        path: /var/run
     commands:
       - n=0; until docker stats --no-stream; do echo "Waiting for Docker $n"; n=$((n +1)); sleep 1; done
 
