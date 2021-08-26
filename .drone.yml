@@ -32,20 +32,20 @@ steps:
       - $(aws ecr get-login --no-include-email)
       - docker pull 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/hocs-data-elastic
 
-  - name: docker-compose up
+  - name: compose_up
     image: docker/compose
     commands:
       - docker-compose -f docker/docker-compose.yml up postgres
     depends_on:
-      - pull data_migration
-      - pull load_elastic
+      - pull_data_migration
+      - pull_load_elastic
 
-  - name: docker-compose down
+  - name: compose_down
     image: docker/compose
     commands:
       - docker-compose -f docker/docker-compose.yml down
     depends_on:
-      - docker-compose up
+      - compose_up
 
 environment:
   DOCKER_HOST: tcp://docker:2375 # needed by dind-awscli
