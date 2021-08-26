@@ -11,11 +11,6 @@ environment:
   DOCKER_HOST: tcp://docker:2375
 
 steps:
-  - name: wait_for_docker
-    image: docker
-    commands:
-      - n=0; until docker stats --no-stream; do echo "Waiting for Docker $n"; n=$((n +1)); sleep 1; done
-
   - name: pull_data_migration
     image: quay.io/ukhomeofficedigital/dind-awscli
     environment:
@@ -27,8 +22,6 @@ steps:
     commands:
       - $(aws ecr get-login --no-include-email)
       - docker pull 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/hocs-data
-    depends_on:
-      - wait_for_docker
 
   - name: pull_load_elastic
     image: quay.io/ukhomeofficedigital/dind-awscli
@@ -41,8 +34,6 @@ steps:
     commands:
       - $(aws ecr get-login --no-include-email)
       - docker pull 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/hocs-data-elastic
-    depends_on:
-      - wait_for_docker
 
 trigger:
   event:
