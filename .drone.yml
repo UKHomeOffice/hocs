@@ -7,6 +7,9 @@ services:
   - name: docker
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
 
+environment:
+  DOCKER_HOST: tcp://docker:2375 # needed by dind-awscli
+
 steps:
   - name: lint docker-compose
     image: docker/compose
@@ -15,6 +18,11 @@ steps:
     when:
       event:
         - push
+
+  - name: wait_for_docker
+    image: docker
+    commands:
+      - n=0; until docker stats --no-stream; do echo "Waiting for Docker $n"; n=$((n +1)); sleep 1; done
 
   - name: pull_data_migration
     image: quay.io/ukhomeofficedigital/dind-awscli
@@ -27,6 +35,8 @@ steps:
     commands:
       - $(aws ecr get-login --no-include-email)
       - docker pull 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/hocs-data
+    depends_on:
+      - wait_for_docker
     when:
       event:
         - promote
@@ -43,6 +53,8 @@ steps:
     commands:
       - $(aws ecr get-login --no-include-email)
       - docker pull 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/hocs-data-elastic
+    depends_on:
+      - wait_for_docker
     when:
       event:
         - promote
@@ -86,7 +98,4 @@ steps:
       event:
         - promote
         - cron
-
-environment:
-  DOCKER_HOST: tcp://docker:2375 # needed by dind-awscli
 ...
