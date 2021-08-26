@@ -27,6 +27,9 @@ steps:
     commands:
       - $(aws ecr get-login --no-include-email)
       - docker pull 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/hocs-data
+    when:
+      event:
+        - promote
 
   - name: pull_load_elastic
     image: quay.io/ukhomeofficedigital/dind-awscli
@@ -39,6 +42,9 @@ steps:
     commands:
       - $(aws ecr get-login --no-include-email)
       - docker pull 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/hocs-data-elastic
+    when:
+      event:
+        - promote
 
   - name: compose_up
     image: docker/compose
@@ -50,6 +56,9 @@ steps:
     depends_on:
       - pull_data_migration
       - pull_load_elastic
+    when:
+      event:
+        - promote
 
   - name: integration_test
     image: busybox
@@ -57,6 +66,9 @@ steps:
       - wget --spider --timeout=5 http://localhost:8080/health
     depends_on:
       - compose_up
+    when:
+      event:
+        - promote
 
   - name: compose_down
     image: docker/compose
@@ -65,11 +77,15 @@ steps:
       - docker-compose down -v
     depends_on:
       - integration_test
+    when:
+      event:
+        - promote
 
 environment:
   DOCKER_HOST: tcp://docker:2375 # needed by dind-awscli
 
 trigger:
   event:
+    - push
     - promote
 ...
