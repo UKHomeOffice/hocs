@@ -35,7 +35,8 @@ steps:
   - name: compose_up
     image: docker/compose
     commands:
-      - docker-compose -f docker/docker-compose.yml up clamav
+      - cd docker
+      - docker-compose up clamav
     depends_on:
       - pull_data_migration
       - pull_load_elastic
@@ -43,7 +44,8 @@ steps:
   - name: compose_down
     image: docker/compose
     commands:
-      - docker-compose -f docker/docker-compose.yml down
+      - cd docker
+      - docker-compose down -v
     depends_on:
       - compose_up
 
