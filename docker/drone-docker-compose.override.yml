@@ -1,0 +1,23 @@
+version: "2.4"
+
+services:
+  management-ui:
+    healthcheck:
+      test: exit 0
+    image: busybox
+    command: [ "echo", "management-ui override" ]
+
+  case_creator:
+    environment:
+      CASE_CREATOR_CASE_SERVICE: http://docker.for.mac.localhost:8082
+    healthcheck:
+      test: exit 0
+    image: busybox
+    command: [ "echo", "case_creator override" ]
+
+  camunda-tools:
+    healthcheck:
+      test: exit 0
+    image: busybox
+    command: [ "echo", "camunda-tools override" ]
+

@@ -36,10 +36,19 @@ steps:
     image: docker/compose
     commands:
       - cd docker
-      - docker-compose up clamav
+      - cp drone-docker-compose.override.yml docker-compose.override.yml
+      - docker-compose up -d
+      - ./scripts/composeDone.sh
     depends_on:
       - pull_data_migration
       - pull_load_elastic
+
+  - name: integration_test
+    image: busybox
+    commands:
+      - wget --spider --timeout=5 http://localhost:8080/health
+    depends_on:
+      - compose_up
 
   - name: compose_down
     image: docker/compose
@@ -47,7 +56,7 @@ steps:
       - cd docker
       - docker-compose down -v
     depends_on:
-      - compose_up
+      - integration_test
 
 environment:
   DOCKER_HOST: tcp://docker:2375 # needed by dind-awscli
