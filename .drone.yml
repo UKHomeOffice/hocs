@@ -65,7 +65,6 @@ steps:
     commands:
       - cd docker
       - cp drone-docker-compose.override.yml docker-compose.override.yml
-      - docker-compose pull
       - docker-compose up -d
       - ./scripts/composeDone.sh
     depends_on:
