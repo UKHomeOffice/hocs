@@ -30,6 +30,7 @@ steps:
     when:
       event:
         - promote
+        - cron
 
   - name: pull_load_elastic
     image: quay.io/ukhomeofficedigital/dind-awscli
@@ -45,6 +46,7 @@ steps:
     when:
       event:
         - promote
+        - cron
 
   - name: compose_up
     image: docker/compose
@@ -59,6 +61,7 @@ steps:
     when:
       event:
         - promote
+        - cron
 
   - name: integration_test
     image: busybox
@@ -69,6 +72,7 @@ steps:
     when:
       event:
         - promote
+        - cron
 
   - name: compose_down
     image: docker/compose
@@ -80,6 +84,7 @@ steps:
     when:
       event:
         - promote
+        - cron
 
 environment:
   DOCKER_HOST: tcp://docker:2375 # needed by dind-awscli
@@ -88,4 +93,5 @@ trigger:
   event:
     - push
     - promote
+    - cron
 ...
