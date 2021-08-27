@@ -7,7 +7,7 @@ services:
       test: ["CMD-SHELL", "pg_isready -U root"]
     restart: always
     ports:
-      - 5432:5432
+      - "5432:5432"
     networks:
       - hocs-network
     environment:
@@ -23,7 +23,7 @@ services:
     image: mockserver/mockserver:mockserver-5.11.1
     command: -logLevel INFO -serverPort 8080
     ports:
-      - 8086:8080
+      - "8086:8080"
     networks:
       - hocs-network
     environment:
@@ -39,8 +39,8 @@ services:
     image: jboss/keycloak:5.0.0
     restart: always
     ports:
-      - 9990:9990
-      - 9081:8080
+      - "9990:9990"
+      - "9081:8080"
     networks:
       - hocs-network
     environment:
@@ -59,12 +59,12 @@ services:
       retries: 3
     image: localstack/localstack:0.9.5
     ports:
-      - 9000:8080
-      - 4572:4572
-      - 4576:4576
-      - 4575:4575
-      - 4571:4571
-      - 4578:4578
+      - "9000:8080"
+      - "4572:4572"
+      - "4576:4576"
+      - "4575:4575"
+      - "4571:4571"
+      - "4578:4578"
     networks:
       - hocs-network
     environment:
@@ -153,7 +153,7 @@ services:
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-frontend:${FRONTEND_TAG:-latest}
     ports:
-      - 8080:8080
+      - "8080:8080"
     networks:
       - hocs-network
     environment:
@@ -179,7 +179,7 @@ services:
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-management-ui:${MANAGEMENT_UI_TAG:-latest}
     ports:
-      - 8099:8080
+      - "8099:8080"
     networks:
       - hocs-network
     environment:
@@ -205,8 +205,8 @@ services:
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-casework:${CASEWORK_TAG:-latest}
     ports:
-      - 8082:8080
-      - 7082:8000
+      - "8082:8080"
+      - "7082:8000"
     networks:
       - hocs-network
     environment:
@@ -236,8 +236,8 @@ services:
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-workflow:${WORKFLOW_TAG:-latest}
     ports:
-      - 8091:8080
-      - 7091:8000
+      - "8091:8080"
+      - "7091:8000"
     networks:
       - hocs-network
     environment:
@@ -267,8 +267,8 @@ services:
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-audit:${AUDIT_TAG:-latest}
     ports:
-      - 8087:8080
-      - 7087:8000
+      - "8087:8080"
+      - "7087:8000"
     networks:
       - hocs-network
     environment:
@@ -294,8 +294,8 @@ services:
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-search:${SEARCH_TAG:-latest}
     ports:
-      - 8088:8080
-      - 7088:8000
+      - "8088:8080"
+      - "7088:8000"
     networks:
       - hocs-network
     environment:
@@ -329,8 +329,8 @@ services:
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-info-service:${INFO_TAG:-latest}
     ports:
-      - 8085:8080
-      - 7085:8000
+      - "8085:8080"
+      - "7085:8000"
     networks:
       - hocs-network
     environment:
@@ -367,8 +367,8 @@ services:
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-notify:${NOTIFY_TAG:-latest}
     ports:
-      - 8089:8080
-      - 7089:8000
+      - "8089:8080"
+      - "7089:8000"
     networks:
       - hocs-network
     environment:
@@ -394,8 +394,8 @@ services:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
     image: quay.io/ukhomeofficedigital/hocs-docs-converter:${DOCS_CONVERTER_TAG:-latest}
     ports:
-      - 8084:8080
-      - 7084:8000
+      - "8084:8080"
+      - "7084:8000"
     networks:
       - hocs-network
     environment:
@@ -411,8 +411,8 @@ services:
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-docs:${DOCS_TAG:-latest}
     ports:
-      - 8083:8080
-      - 7083:8000
+      - "8083:8080"
+      - "7083:8000"
     networks:
       - hocs-network
     environment:
@@ -446,8 +446,8 @@ services:
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-templates:${TEMPLATES_TAG:-latest}
     ports:
-      - 8090:8080
-      - 7090:8000
+      - "8090:8080"
+      - "7090:8000"
     networks:
       - hocs-network
     environment:
@@ -460,8 +460,8 @@ services:
   case_creator:
     image: quay.io/ukhomeofficedigital/hocs-case-creator:${CASE_CREATOR_TAG:-latest}
     ports:
-      - 8092:8080
-      - 7092:8000
+      - "8092:8080"
+      - "7092:8000"
     networks:
       - hocs-network
     environment:
@@ -499,7 +499,7 @@ services:
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-camunda-tools:0.0.3
     ports:
-      - 8093:8080
+      - "8093:8080"
     networks:
       - hocs-network
     environment:
