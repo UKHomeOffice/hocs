@@ -23,6 +23,10 @@ steps:
     image: docker
     commands:
       - n=0; until docker stats --no-stream; do echo "Waiting for Docker $n"; n=$((n +1)); sleep 1; done
+    when:
+      event:
+        - promote
+        - cron
 
   - name: pull_data_migration
     image: quay.io/ukhomeofficedigital/dind-awscli
