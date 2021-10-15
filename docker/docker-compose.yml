@@ -57,7 +57,7 @@ services:
       start_period: 1m
       timeout: 30s
       retries: 3
-    image: localstack/localstack:0.9.5
+    image: localstack/localstack:0.11.1
     ports:
       - 9000:8080
       - 4572:4572
@@ -65,6 +65,7 @@ services:
       - 4575:4575
       - 4571:4571
       - 4578:4578
+      - 4566:4566
     networks:
       - hocs-network
     environment:
