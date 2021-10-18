@@ -292,7 +292,7 @@ services:
       AUDIT_QUEUE_NAME: "audit-queue"
       AUDIT_QUEUE_DLQ_NAME: "audit-queue-dlq"
       HOCS_INFO_SERVICE: "http://info:8080"
-      AWS_LOCAL_HOST: "localstack"
+      LOCALSTACK_HOST: "localstack"
     depends_on:
       postgres:
         condition: service_healthy
