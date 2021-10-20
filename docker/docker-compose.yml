@@ -104,6 +104,7 @@ services:
         aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name ukvi-complaint-queue-dlq
         aws --endpoint-url=http://localstack:4572 s3 mb s3://untrusted-bucket
         aws --endpoint-url=http://localstack:4572 s3 mb s3://trusted-bucket
+        aws --endpoint-url=http://localstack:4578 es create-elasticsearch-domain --domain-name decs --elasticsearch-version 6.7
         sleep 8h
     environment:
       AWS_ACCESS_KEY_ID: UNSET
