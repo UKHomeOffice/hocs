@@ -407,7 +407,7 @@ services:
     
   converter:
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: ["CMD", "wget", "http://localhost:8080/actuator/health"]
     image: quay.io/ukhomeofficedigital/hocs-docs-converter:${DOCS_CONVERTER_TAG:-latest}
     ports:
       - 8084:8080
