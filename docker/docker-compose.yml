@@ -404,7 +404,7 @@ services:
         condition: service_started
       keycloak:
         condition: service_started
-    
+
   converter:
     healthcheck:
       test: ["CMD", "wget", "http://localhost:8080/actuator/health"]
@@ -419,6 +419,11 @@ services:
       SERVER_PORT: 8080
 
   documents:
+    healthcheck:
+      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
+      start_period: 2m
+      timeout: 30s
+      retries: 3
     image: quay.io/ukhomeofficedigital/hocs-docs:${DOCS_TAG:-latest}
     ports:
       - 8083:8080
@@ -426,6 +431,7 @@ services:
     networks:
       - hocs-network
     environment:
+      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000"
       SPRING_PROFILES_ACTIVE: "development, local, postgres"
       SPRING_FLYWAY_SCHEMAS: "document"
       SERVER_PORT: 8080
@@ -439,6 +445,15 @@ services:
       CLAMAV_ROOT: "http4://clamav:8080"
       DB_HOST: "postgres"
       AWS_LOCAL_HOST: "localstack"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      localstack:
+        condition: service_healthy
+      converter:
+        condition: service_healthy
+      aws_cli:
+        condition: service_started
 
   templates:
     healthcheck:
