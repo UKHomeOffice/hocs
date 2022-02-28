@@ -275,18 +275,16 @@ services:
 
   audit:
     healthcheck:
-      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
+      test: "wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit"
       start_period: 2m
       timeout: 30s
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-audit:${AUDIT_TAG:-latest}
     ports:
       - 8087:8080
-      - 7087:8000
     networks:
       - hocs-network
     environment:
-      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000"
       SPRING_PROFILES_ACTIVE: "development, local"
       SERVER_PORT: 8080
       DB_HOST: "postgres"
@@ -302,18 +300,16 @@ services:
 
   search:
     healthcheck:
-      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
+      test: "wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit"
       start_period: 1m
       timeout: 30s
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-search:${SEARCH_TAG:-latest}
     ports:
       - 8088:8080
-      - 7088:8000
     networks:
       - hocs-network
     environment:
-      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000"
       SPRING_PROFILES_ACTIVE: "development, local, localelastic"
       SERVER_PORT: 8080
       DB_HOST: "postgres"
@@ -328,8 +324,6 @@ services:
       AWS_SQS_ACCESS_KEY: "UNSET"
       AWS_SQS_SECRET_KEY: "UNSET"
     depends_on:
-      postgres:
-        condition: service_healthy
       localstack:
         condition: service_healthy
       aws_cli:
@@ -337,18 +331,16 @@ services:
 
   info:
     healthcheck:
-      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
+      test: "wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit"
       start_period: 3m
       timeout: 30s
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-info-service:${INFO_TAG:-latest}
     ports:
       - 8085:8080
-      - 7085:8000
     networks:
       - hocs-network
     environment:
-      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000"
       SPRING_PROFILES_ACTIVE: "development, local"
       SERVER_PORT: 8080
       DB_HOST: "postgres"
@@ -372,23 +364,19 @@ services:
         condition: service_started
       keycloak:
         condition: service_started
-      notify:
-        condition: service_started
 
   notify:
     healthcheck:
-      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
+      test: "wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit"
       start_period: 3m
       timeout: 30s
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-notify:${NOTIFY_TAG:-latest}
     ports:
       - 8089:8080
-      - 7089:8000
     networks:
       - hocs-network
     environment:
-      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000"
       SPRING_PROFILES_ACTIVE: "development, local"
       SERVER_PORT: 8080
       KEYCLOAK_SERVER_ROOT: "http://keycloak:8080"
@@ -400,38 +388,32 @@ services:
     depends_on:
       aws_cli:
         condition: service_started
-      data_migration:
-        condition: service_started
       keycloak:
         condition: service_started
 
   converter:
     healthcheck:
-      test: ["CMD", "wget", "http://localhost:8080/actuator/health"]
+      test: "wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit"
     image: quay.io/ukhomeofficedigital/hocs-docs-converter:${DOCS_CONVERTER_TAG:-latest}
     ports:
       - 8084:8080
-      - 7084:8000
     networks:
       - hocs-network
     environment:
-      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000"
       SERVER_PORT: 8080
 
   documents:
     healthcheck:
-      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
+      test: "wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit"
       start_period: 2m
       timeout: 30s
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-docs:${DOCS_TAG:-latest}
     ports:
       - 8083:8080
-      - 7083:8000
     networks:
       - hocs-network
     environment:
-      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000"
       SPRING_PROFILES_ACTIVE: "development, local, postgres"
       SPRING_FLYWAY_SCHEMAS: "document"
       SERVER_PORT: 8080
@@ -457,18 +439,16 @@ services:
 
   templates:
     healthcheck:
-      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
+      test: "wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit"
       start_period: 1m
       timeout: 30s
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-templates:${TEMPLATES_TAG:-latest}
     ports:
       - 8090:8080
-      - 7090:8000
     networks:
       - hocs-network
     environment:
-      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000"
       SERVER_PORT: 8080
       HOCS_INFO_SERVICE: "http://info:8080"
       HOCS_AUDITSERVICE: "http://casework:8080"
@@ -478,11 +458,9 @@ services:
     image: quay.io/ukhomeofficedigital/hocs-case-creator:${CASE_CREATOR_TAG:-latest}
     ports:
       - 8092:8080
-      - 7092:8000
     networks:
       - hocs-network
     environment:
-      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000"
       SPRING_PROFILES_ACTIVE: "development, local"
       SERVER_PORT: 8080
       AWS_LOCAL_HOST: "localstack"
@@ -510,8 +488,7 @@ services:
 
   camunda-tools:
     healthcheck:
-      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
-      start_period: 1m
+      test: "wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit"
       timeout: 30s
       retries: 3
     image: quay.io/ukhomeofficedigital/hocs-camunda-tools:0.0.3
