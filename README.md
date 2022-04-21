@@ -12,7 +12,7 @@ Most development for DECS is open-source, but coded by developers who work at
 or for the Home Office.
 
 * **Development discussion** happens primarily on the [internal Home Office Digital slack
-  instance](https://homeofficedigital.slack.com), in the `#hocs_sheffield` and `#decs-dev`
+  instance](https://homeofficedigital.slack.com), in `#decs-dev`
   channels, with secondary discussions happening between developers using a
   video-conferencing tool.
 * **Source code** is managed by the Git revision control system, with code
@@ -28,12 +28,6 @@ Some rarely used legacy code is stored in the Home Office's own GitLab instance.
 All HOCS code on GitHub is hosted within the UKHomeOffice organisation.
 You can [search the organisation](https://github.com/UKHomeOffice/?q=hocs) for
 a list of our repositories. Some repositories are archived, and no longer in use.
-
-Most repositories come in pairs: one containing the codebase, like
-[UKHomeOffice/hocs-info-service](https://github.com/UKHomeOffice/hocs-info-service),
-and a counterpart containing the Kubernetes configuration we use to host the
-application (here,
-[UKHomeOffice/kube-hocs-info-service](https://github.com/UKHomeOffice/kube-hocs-info-service)).
 
 Some parts of the HOCS codebase are not publicly available.
 This includes the schema used to set up the info-service.
