@@ -35,9 +35,9 @@ services:
 
   keycloak:
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/auth"]
+      test: ["CMD", "curl", "-f", "http://localhost:8080/auth/"]
       start_period: 1m
-    image: jboss/keycloak:11.0.2
+    image: quay.io/keycloak/keycloak:15.1.1
     restart: always
     ports:
       - 9990:9990
@@ -45,6 +45,7 @@ services:
     networks:
       - hocs-network
     environment:
+
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: password1
       KEYCLOAK_IMPORT: /tmp/local-realm.json
@@ -111,16 +112,6 @@ services:
       AWS_ACCESS_KEY_ID: UNSET
       AWS_SECRET_ACCESS_KEY: UNSET
       AWS_DEFAULT_REGION: "eu-west-2"
-    networks:
-      - hocs-network
-    depends_on:
-      localstack:
-        condition: service_healthy
-
-  load_elastic:
-    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/${HOCS_DATA_ELASTIC_REPO:-hocs-data-elastic}:${HOCS_DATA_TAG:-latest}
-    environment:
-      ELASTIC_HOST: localstack
     networks:
       - hocs-network
     depends_on:
@@ -214,7 +205,7 @@ services:
 
   casework:
     healthcheck:
-      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
+      test: "wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit"
       start_period: 2m
       timeout: 30s
       retries: 3
@@ -229,6 +220,7 @@ services:
       SPRING_PROFILES_ACTIVE: "development, local"
       SERVER_PORT: 8080
       DB_HOST: "postgres"
+      LOCALSTACK_CONFIG_HOST: "localstack"
       AWS_LOCAL_HOST: "localstack"
       NOTIFY_QUEUE_NAME: "notify-queue"
       NOTIFY_QUEUE_DLQ_NAME: "notify-queue-dlq"
@@ -245,7 +237,7 @@ services:
 
   workflow:
     healthcheck:
-      test: ["CMD", "java", "/app/scripts/HealthCheck.java", "http://localhost:8080/actuator/health", "||", "exit", "1"]
+      test: "wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit"
       start_period: 3m
       timeout: 30s
       retries: 3
@@ -269,6 +261,7 @@ services:
       HOCS_INFO_SERVICE: "http://info:8080"
       DB_HOST: "postgres"
       DB_SCHEMA_NAME: "workflow"
+      LOCALSTACK_CONFIG_HOST: "localstack"
       AWS_LOCAL_HOST: "localstack"
     depends_on:
       postgres:
@@ -311,13 +304,15 @@ services:
     networks:
       - hocs-network
     environment:
-      SPRING_PROFILES_ACTIVE: "development, local, localelastic"
+      SPRING_PROFILES_ACTIVE: "development, local"
       SERVER_PORT: 8080
+      MANAGEMENT_HEALTH_ELASTICSEARCH_ENABLED: "false"
       DB_HOST: "postgres"
       SEARCH_QUEUE_NAME: "search-queue"
       SEARCH_QUEUE_DLQ_NAME: "search-queue-dlq"
       AWS_LOCAL_HOST: "localstack"
-      ELASTIC_INDEX_PREFIX: "local"
+      AWS_ES_INDEX_PREFIX: "local"
+      AWS_ES_RESULTS_LIMIT: 1000
       ELASTICSEARCH_HOST: "localstack"
       ELASTICSEARCH_PORT: "4571"
       ELASTICSEARCH_ACCESS_KEY: "UNSET"
@@ -485,24 +480,6 @@ services:
       DOCUMENT_S3_UNTRUSTED_BUCKET_NAME: "untrusted-bucket"
     depends_on:
       aws_cli:
-        condition: service_healthy
-
-  camunda-tools:
-    healthcheck:
-      test: "wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit"
-      timeout: 30s
-      retries: 3
-    image: quay.io/ukhomeofficedigital/hocs-camunda-tools:0.0.3
-    ports:
-      - 8093:8080
-    networks:
-      - hocs-network
-    environment:
-      DB_HOST: "postgres"
-      CAMUNDA_ADMIN_USERNAME: "admin"
-      CAMUNDA_ADMIN_PASSWORD: "admin"
-    depends_on:
-      workflow:
         condition: service_healthy
 
 networks:
