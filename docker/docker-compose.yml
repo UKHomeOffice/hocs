@@ -55,68 +55,26 @@ services:
 
   localstack:
     healthcheck:
-      test: "bash -c 'AWS_ACCESS_KEY_ID=fake AWS_SECRET_ACCESS_KEY=fake aws --endpoint-url=http://localhost:4572 s3 ls'"
+      test: "bash -c 'AWS_ACCESS_KEY_ID=fake AWS_SECRET_ACCESS_KEY=fake awslocal s3 ls'"
       start_period: 1m
       timeout: 30s
       retries: 3
-    image: localstack/localstack:0.11.1
+    image: localstack/localstack:0.14.3
     ports:
-      - 9000:8080
-      - 4572:4572
-      - 4576:4576
-      - 4575:4575
-      - 4571:4571
-      - 4578:4578
       - 4566:4566
     networks:
-      - hocs-network
+      hocs-network:
+        aliases:
+          - localhost.localstack.cloud
     environment:
       HOSTNAME_EXTERNAL: localstack
       DEFAULT_REGION: eu-west-2
       SERVICES: sqs,sns,es,s3
-
-  aws_cli:
-    healthcheck:
-      test: "bash -c 'AWS_ACCESS_KEY_ID=fake AWS_SECRET_ACCESS_KEY=fake aws --endpoint-url=http://localstack:4572 s3 ls s3://trusted-bucket'"
-      start_period: 1m
-      timeout: 10s
-      retries: 3
-    image: xueshanf/awscli
-    # The sleep 8h at the end of this command is to keep aws_cli running. Without it, this step can get run multiple times.
-    command:
-      - /bin/sh
-      - -c
-      - |
-        aws --version
-        aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name document-queue
-        aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name document-queue-dlq
-        aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name audit-queue
-        aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name audit-queue-dlq
-        aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name search-queue
-        aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name search-queue-dlq
-        aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name notify-queue
-        aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name notify-queue-dlq
-        aws --endpoint-url=http://localstack:4575 sns create-topic --name hocs-audit-topic
-        aws --endpoint-url=http://localstack:4575 sns subscribe --topic-arn arn:aws:sns:eu-west-2:123456789012:hocs-audit-topic --attributes RawMessageDelivery=true --protocol sqs --notification-endpoint arn:aws:sns:eu-west-2:123456789012:audit-queue
-        aws --endpoint-url=http://localstack:4575 sns subscribe --topic-arn arn:aws:sns:eu-west-2:123456789012:hocs-audit-topic --attributes RawMessageDelivery=true --protocol sqs --notification-endpoint arn:aws:sns:eu-west-2:123456789012:search-queue
-        aws --endpoint-url=http://localstack:4575 sns set-subscription-attributes --subscription-arn $$(aws --endpoint-url=http://localstack:4575 sns list-subscriptions-by-topic --topic-arn arn:aws:sns:eu-west-2:123456789012:hocs-audit-topic --output json | jq --raw-output '.Subscriptions[0].SubscriptionArn') --attribute-name RawMessageDelivery --attribute-value true
-        aws --endpoint-url=http://localstack:4575 sns set-subscription-attributes --subscription-arn $$(aws --endpoint-url=http://localstack:4575 sns list-subscriptions-by-topic --topic-arn arn:aws:sns:eu-west-2:123456789012:hocs-audit-topic --output json | jq --raw-output '.Subscriptions[1].SubscriptionArn') --attribute-name RawMessageDelivery --attribute-value true
-        aws --endpoint-url=http://localstack:4575 sns list-subscriptions
-        aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name ukvi-complaint-queue
-        aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name ukvi-complaint-queue-dlq
-        aws --endpoint-url=http://localstack:4572 s3 mb s3://untrusted-bucket
-        aws --endpoint-url=http://localstack:4572 s3 mb s3://trusted-bucket
-        aws --endpoint-url=http://localstack:4578 es create-elasticsearch-domain --domain-name decs
-        sleep 8h
-    environment:
-      AWS_ACCESS_KEY_ID: UNSET
-      AWS_SECRET_ACCESS_KEY: UNSET
-      AWS_DEFAULT_REGION: "eu-west-2"
-    networks:
-      - hocs-network
-    depends_on:
-      localstack:
-        condition: service_healthy
+      OPENSEARCH_ENDPOINT_STRATEGY: "path"
+      LOCALSTACK_HOSTNAME: "localhost.localstack.cloud"
+      SQS_PROVIDER: "elasticmq"
+    volumes:
+      - ./localstack:/docker-entrypoint-initaws.d
 
   data_migration:
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/hocs/${HOCS_DATA_REPO:-hocs-data}:${HOCS_DATA_TAG:-latest}
@@ -160,7 +118,7 @@ services:
       DOCUMENT_BULK_LIMIT: 40
       VALID_DAYS_RANGE: 180
       S3_BUCKET: "untrusted-bucket"
-      S3_ENDPOINT: http://localstack:4572
+      S3_ENDPOINT: http://localstack:4566
     depends_on:
       workflow:
         condition: service_healthy
@@ -199,8 +157,6 @@ services:
       documents:
         condition: service_healthy
       localstack:
-        condition: service_healthy
-      aws_cli:
         condition: service_healthy
 
   casework:
@@ -261,7 +217,6 @@ services:
       HOCS_INFO_SERVICE: "http://info:8080"
       DB_HOST: "postgres"
       DB_SCHEMA_NAME: "workflow"
-      LOCALSTACK_CONFIG_HOST: "localstack"
       AWS_LOCAL_HOST: "localstack"
     depends_on:
       postgres:
@@ -282,8 +237,6 @@ services:
       SPRING_PROFILES_ACTIVE: "development, local"
       SERVER_PORT: 8080
       DB_HOST: "postgres"
-      AUDIT_QUEUE_NAME: "audit-queue"
-      AUDIT_QUEUE_DLQ_NAME: "audit-queue-dlq"
       HOCS_INFO_SERVICE: "http://info:8080"
       LOCALSTACK_HOST: "localstack"
     depends_on:
@@ -304,26 +257,14 @@ services:
     networks:
       - hocs-network
     environment:
-      SPRING_PROFILES_ACTIVE: "development, local"
+      SPRING_PROFILES_ACTIVE: "development,localstack"
       SERVER_PORT: 8080
-      MANAGEMENT_HEALTH_ELASTICSEARCH_ENABLED: "false"
       DB_HOST: "postgres"
-      SEARCH_QUEUE_NAME: "search-queue"
-      SEARCH_QUEUE_DLQ_NAME: "search-queue-dlq"
       AWS_LOCAL_HOST: "localstack"
-      AWS_ES_INDEX_PREFIX: "local"
-      AWS_ES_RESULTS_LIMIT: 1000
-      ELASTICSEARCH_HOST: "localstack"
-      ELASTICSEARCH_PORT: "4571"
-      ELASTICSEARCH_ACCESS_KEY: "UNSET"
-      ELASTICSEARCH_SECRET_KEY: "UNSET"
-      AWS_SQS_ACCESS_KEY: "UNSET"
-      AWS_SQS_SECRET_KEY: "UNSET"
+      LOCALSTACK_HOST:  "localstack"
     depends_on:
       localstack:
         condition: service_healthy
-      aws_cli:
-        condition: service_started
 
   info:
     healthcheck:
@@ -354,8 +295,6 @@ services:
       AUDIT_QUEUE_DLQ_NAME: "audit-queue-dlq"
       HOCS_AUDIT_SERVICE: "http://audit:8080"
     depends_on:
-      aws_cli:
-        condition: service_started
       data_migration:
         condition: service_started
       keycloak:
@@ -382,7 +321,7 @@ services:
       NOTIFY_QUEUE_DLQ_NAME: "notify-queue-dlq"
       NOTIFY_API_KEY: "aaaaaaaaaa-11111111-1111-1111-1111-111111111111-11111111-1111-1111-aaaa-aaaaaaaaaaaa"
     depends_on:
-      aws_cli:
+      localstack:
         condition: service_started
       keycloak:
         condition: service_started
@@ -430,8 +369,6 @@ services:
         condition: service_healthy
       converter:
         condition: service_healthy
-      aws_cli:
-        condition: service_started
 
   templates:
     healthcheck:
@@ -479,7 +416,7 @@ services:
       DOCUMENT_S3_SECRET_KEY: "1234"
       DOCUMENT_S3_UNTRUSTED_BUCKET_NAME: "untrusted-bucket"
     depends_on:
-      aws_cli:
+      localstack:
         condition: service_healthy
 
 networks:
