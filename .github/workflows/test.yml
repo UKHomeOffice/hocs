@@ -10,13 +10,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Test for JQ
-        run: jq -h
-        shell: bash
-
       - name: Start infrastructure
-        run: docker-compose -f ./docker/docker-compose.yml up -d localstack postgres
+        run: docker-compose -f ./docker/docker-compose.yml up -d localstack postgres keycloak
 
       - name: Wait for infrastructure
         run: docker/ci/wait-for-infrastructure.sh
         shell: bash
+
+      - name: Start services
+        run: docker-compose -f ./docker/docker-compose.yml up casework workflow documents converter audit templates search
