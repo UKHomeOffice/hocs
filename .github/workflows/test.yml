@@ -15,7 +15,7 @@ jobs:
         shell: bash
 
       - name: Start infrastructure
-        run: docker-compose up -d localstack postgres
+        run: docker-compose -f ./docker/docker-compose.yml up -d localstack postgres
 
       - name: Wait for infrastructure
         run: docker/ci/wait-for-infrastructure.sh
