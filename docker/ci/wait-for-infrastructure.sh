@@ -1,7 +1,9 @@
 #!/bin/bash
 set -euo
 
-until curl 'localhost.localstack.cloud:4566/es/eu-west-2/decs/_cat/indices?v' | grep -q "local-case"; do
-   sleep 5
+until curl 'localhost.localstack.cloud:4566/es/eu-west-2/decs/_cat/indices?v' --silent | grep -q "local-case"; do
+   sleep 20
    echo "Waiting for Elasticsearch Index to be present..."
+   docker-compose logs -t
+   curl 'localhost.localstack.cloud:4566/es/eu-west-2/decs/local-case'
 done
