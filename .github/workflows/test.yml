@@ -18,4 +18,4 @@ jobs:
         shell: bash
 
       - name: Start services
-        run: docker-compose -f ./docker/docker-compose.yml up casework workflow documents converter audit templates search
+        run: docker-compose -f ./docker/docker-compose.yml up casework workflow documents audit templates search
