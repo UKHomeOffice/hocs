@@ -419,5 +419,26 @@ services:
       localstack:
         condition: service_healthy
 
+  camunda-tools:
+    healthcheck:
+      test: "wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit"
+      timeout: 30s
+      retries: 3
+    image: quay.io/ukhomeofficedigital/hocs-camunda-tools:0.0.3
+    ports:
+      - 8093:8080
+    networks:
+      - hocs-network
+    environment:
+      DB_HOST: "postgres"
+      CAMUNDA_ADMIN_USERNAME: "admin"
+      CAMUNDA_ADMIN_PASSWORD: "admin"
+    depends_on:
+      workflow:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+
+
 networks:
   hocs-network:
