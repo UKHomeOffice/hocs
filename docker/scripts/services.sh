@@ -1,3 +1,4 @@
 #!/bin/bash
-echo "Pulling latest and setting up services"
-docker-compose up -d documents audit workflow casework info search templates
+echo "Setting up services"
+docker-compose -f ./docker/docker-compose.yml up -d casework documents info workflow
+docker ps

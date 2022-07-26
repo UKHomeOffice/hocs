@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+  localstack:
+    environment:
+      SERVICES: sqs,sns,es,s3
+      OPENSEARCH_ENDPOINT_STRATEGY: "path"
+    volumes:
+      - ${PWD}/docker/localstack/3-setup-elastic.sh:/docker-entrypoint-initaws.d/3-setup-elastic.sh
+      - ${PWD}/docker/localstack/4-setup_index.sh:/docker-entrypoint-initaws.d/4-setup_index.sh
+      - ${PWD}/docker/localstack/elastic_mapping.json:/docker-entrypoint-initaws.d/elastic_mapping.json
+
+  casework:
+    depends_on:
+      - search
