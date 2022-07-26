@@ -1,5 +1,10 @@
 #!/bin/bash
 echo "Pulling latest and setting up infrastructure services"
-docker-compose -f ./ci/docker-compose.yml pull
-docker-compose -f ./ci/docker-compose.yml up -d keycloak localstack postgres
+
+COMPOSE_SERVICES="keycloak localstack postgres"
+
+docker-compose -f ./ci/docker-compose.yml pull ${COMPOSE_SERVICES}
+
+COMPOSE_SERVICES=${COMPOSE_SERVICES} INCLUDE_ELASTIC=false ./ci/infrastructure.sh
+
 docker ps
