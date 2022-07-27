@@ -1,3 +1,3 @@
 #!/bin/bash
 echo "Tearing down docker-compose and clearing volumes"
-docker-compose rm -vfs
+docker-compose -f ./ci/docker-compose.yml rm -vfs
