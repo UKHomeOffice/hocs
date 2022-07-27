@@ -32,6 +32,15 @@ a list of our repositories. Some repositories are archived, and no longer in use
 Some parts of the HOCS codebase are not publicly available.
 This includes the schema used to set up the info-service.
 
+## Submodules
+
+This project and others contain a 'ci' submodule with the docker-compose and infrastructure scripts in it. 
+Most modern IDEs will handle pulling this automatically for you, but if not
+
+```console
+$ git submodule update --init --recursive
+```
+
 ## Docker Compose
 
 This repository contains a [Docker Compose](https://docs.docker.com/compose/)
