@@ -11,19 +11,9 @@ library. Frontend components are written using JavaScript, often React.
 Most development for DECS is open-source, but coded by developers who work at
 or for the Home Office.
 
-* **Development discussion** happens primarily on the [internal Home Office Digital slack
-  instance](https://homeofficedigital.slack.com), in `#decs-dev`
-  channels, with secondary discussions happening between developers using a
-  video-conferencing tool.
-* **Source code** is managed by the Git revision control system, with code
-  hosted on GitHub.
-* **Bug reports** are managed via the Home Office's self-hosted instance of Jira.
-* **Code review** is managed using GitHub's merge request functionality.
-
 ## Getting the code
 
 Almost all HOCS code is open-source and publicly available on GitHub.
-Some rarely used legacy code is stored in the Home Office's own GitLab instance.
 
 All HOCS code on GitHub is hosted within the UKHomeOffice organisation.
 You can [search the organisation](https://github.com/UKHomeOffice/?q=hocs) for
@@ -34,7 +24,7 @@ This includes the schema used to set up the info-service.
 
 ## Submodules
 
-This project and others contain a 'ci' submodule with the docker-compose and infrastructure scripts in it. 
+This project contains a 'ci' submodule with a docker-compose and infrastructure scripts in it. 
 Most modern IDEs will handle pulling this automatically for you, but if not
 
 ```console
@@ -44,78 +34,81 @@ $ git submodule update --init --recursive
 ## Docker Compose
 
 This repository contains a [Docker Compose](https://docs.docker.com/compose/)
-configuration.
+file.
 
-To pull all services, from the project directory run:
+### Pull all services
+From the project root run:
 ```console
 $ docker-compose -f ./ci/docker-compose.yml pull
 ```
 
-To start 'typical' services and the frontend, from the project root run:
+### Start typical services and the frontend
+From the project root run:
 ```console
 $ docker-compose -f ./ci/docker-compose.yml up -d frontend 
 ```
 
-With Docker using 4 GB of memory, this takes approximately 2 minutes to startup.
+>With Docker using 4 GB of memory, this takes approximately 2 minutes to startup.
 
-To start with 'typical' + search and the frontend, from the project root run:
+### Start typical service and the frontend including search
+From the project root run:
 ```console
 $ docker-compose -f ./ci/docker-compose.yml -f ./ci/docker-compose.elastic.yml up -d frontend 
 ```
 
-Docker will need more than 4 GB of memory, or for developing against elasticsearch just start localstack:
+>Docker will need more than 4 GB of memory, or for developing against elasticsearch just start localstack:
 
+### Start localstack (sqs, sns, s3)
+From the project root run:
+```console
+$ docker-compose -f ./ci/docker-compose.yml -d localstack 
+```
+>With Docker using 4 GB of memory, this takes approximately 2 minutes to startup.
+
+### Start localstack (sqs, sns, s3, es)
+From the project root run:
 ```console
 $ docker-compose -f ./ci/docker-compose.yml -f ./ci/docker-compose.elastic.yml up -d localstack 
 ```
 
-With Docker using 4 GB of memory, this takes approximately 2 minutes to startup.
+>With Docker using 4 GB of memory, this takes approximately 5 minutes to startup.
 
-To turn the containers off, from the project root run:
+
+### Stop the services
+From the project root run:
 ```console
 $ docker-compose -f ./ci/docker-compose.yml stop
 ```
-> Note this will retain data in the local database and other volumes.
+> This will retain data in the local database and other volumes.
 
-If you wish to Stop and remove containers, networks, images, and volumes,
-from the project root run:
+### Stop and remove containers, networks, images, and volumes,
+From the project root run:
 ```console
 $ docker-compose -f ./ci/docker-compose.yml rm -vfs
 ```
-> Note this will remove the local database and all data.
+> This will remove the local database and all data.
 
-To only run the infrastructure containers (like PostgreSQL, AWS and ClamAV),
-or to run the other HOCS services that aren't frontend, from the project root run:
+### Start individual services without any dependencies
+From the project root run:
 ```console
-$ ./infrastructure.sh
-$ ./services.sh
-```
-
-You can also run individual services. From the project root run:
-```console
-$ docker-compose -f ./ci/docker-compose.yml up frontend
+$ docker-compose -f ./ci/docker-compose.yml up --no-deps casework 
 ```
 
 ### Use of .env file
 The docker-compose file has variables for the image tags. This allows the use of a ``.env`` file.
 By default, ``latest`` will be used. The following is an example of a file overriding some services:
 ```shell
-FRONTEND_TAG=branch-epic_HOCS-COMP
-CASEWORK_TAG=branch-epic_HOCS-COMP
-WORKFLOW_TAG=branch-epic_HOCS-COMP
-CASE_CREATOR_TAG=branch-epic_HOCS-COMP
-INFO_TAG=branch-epic_HOCS-COMP
-HOCS_DATA_TAG=branch-feature_HOCS-2907-compose-up-all
+FRONTEND_TAG=1.2.3
+CASEWORK_TAG=1.0.25
+WORKFLOW_TAG=latest
+CASE_CREATOR_TAG=1.2.4
+INFO_TAG=f99d9a7573e93f1c664ce11e0189764a688dbee4
+HOCS_DATA_TAG=1.0.0
 HOCS_DATA_REPO=hocs-data
-HOCS_DATA_ELASTIC_REPO=hocs-data-elastic
 ```
 The `HOCS_DATA_REPO` can be one of:
 * hocs-data
 * hocs-data-wcs
-
-The `HOCS_DATA_ELASTIC_REPO` can be one of:
-* hocs-data-elastic
-* hocs-data-wcs-elastic
 
 ### Data migration
 
