@@ -1,4 +1,4 @@
-kubectl command for fetching current versions on an environment:
+kubectl command for fetching current image versions on an environment:
 
 ```
 kubectl get deployment -n <ENVIRONMENT> -o custom-columns=:"metadata.labels.version,SERVICE:metadata.name"
