@@ -24,15 +24,15 @@ Almost all HOCS code is open-source and publicly available on GitHub.
 
 [hocs-casework](https://github.com/UKHomeOffice/hocs-casework)
 
-[hocs-data 🔒️ *(deprecated)*](https://github.com/UKHomeOffice/hocs-data)
+[hocs-data 🔒️ *(to be deprecated)*](https://github.com/UKHomeOffice/hocs-data)
 
-[hocs-data-wcs 🔒️ *(deprecated)*](https://github.com/UKHomeOffice/hocs-data-wcs)
+[hocs-data-wcs 🔒️ *(to be deprecated)*](https://github.com/UKHomeOffice/hocs-data-wcs)
 
 [hocs-docs](https://github.com/UKHomeOffice/hocs-docs)
 
 [hocs-docs-converter](https://github.com/UKHomeOffice/hocs-docs-converter)
 
-[hocs-info-service *(deprecated)*](https://github.com/UKHomeOffice/hocs-info-service)
+[hocs-info-service](https://github.com/UKHomeOffice/hocs-info-service)
 
 [hocs-notify](https://github.com/UKHomeOffice/hocs-notify)
 
@@ -62,6 +62,8 @@ Almost all HOCS code is open-source and publicly available on GitHub.
 [semver-calculate-action](https://github.com/UKHomeOffice/semver-calculate-action)
 
 [semver-tag-action](https://github.com/UKHomeOffice/semver-tag-action)
+
+[view open pull requests shortcut](https://github.com/pulls?q=is%3Aopen+repo%3AUKHomeOffice%2Fhocs-ci-infrastructure+repo%3AUKHomeOffice%2Fsemver-calculate-action+repo%3AUKHomeOffice%2Fhocs-extracts+repo%3AUKHomeOffice%2Fhocs-toolbox+repo%3AUKHomeOffice%2Fhocs-audit+repo%3AUKHomeOffice%2Fhocs-case-creator+repo%3AUKHomeOffice%2Fhocs-casework+repo%3AUKHomeOffice%2Fhocs-docs+repo%3AUKHomeOffice%2Fhocs-docs-converter+repo%3AUKHomeOffice%2Fhocs-info-service+repo%3AUKHomeOffice%2Fkube-hocs+repo%3AUKHomeOffice%2Fhocs-search+repo%3AUKHomeOffice%2Fhocs-management-ui+repo%3AUKHomeOffice%2Fhocs-templates+repo%3AUKHomeOffice%2Fhocs-notify+repo%3AUKHomeOffice%2Fhocs-workflow+repo%3AUKHomeOffice%2Fhocs-frontend+repo%3AUKHomeOffice%2Fhocs-base-image+repo%3AUKHomeOffice%2Fhocs+repo%3AUKHomeOffice%2Fhocs-ukvi-complaint-schema+repo%3AUKHomeOffice%2Fhocs-data+repo%3AUKHomeOffice%2Fhocs-data-wcs+repo%3AUKHomeOffice%2Fhocs-queue-tool+repo%3AUKHomeOffice%2Fmatch-label-action+repo%3AUKHomeOffice%2Fsemver-tag-action+)
 
 
 
