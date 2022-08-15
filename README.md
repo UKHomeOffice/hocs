@@ -15,12 +15,57 @@ or for the Home Office.
 
 Almost all HOCS code is open-source and publicly available on GitHub.
 
-All HOCS code on GitHub is hosted within the UKHomeOffice organisation.
-You can [search the organisation](https://github.com/UKHomeOffice/?q=hocs) for
-a list of our repositories. Some repositories are archived, and no longer in use.
+### Core components
+[hocs-audit](https://github.com/UKHomeOffice/hocs-audit)
 
-Some parts of the HOCS codebase are not publicly available.
-This includes the schema used to set up the info-service.
+[hocs-extracts](https://github.com/UKHomeOffice/hocs-extracts)
+
+[hocs-case-creator](https://github.com/UKHomeOffice/hocs-case-creator)
+
+[hocs-casework](https://github.com/UKHomeOffice/hocs-casework)
+
+[hocs-data 🔒️ *(deprecated)*](https://github.com/UKHomeOffice/hocs-data)
+
+[hocs-data-wcs 🔒️ *(deprecated)*](https://github.com/UKHomeOffice/hocs-data-wcs)
+
+[hocs-docs](https://github.com/UKHomeOffice/hocs-docs)
+
+[hocs-docs-converter](https://github.com/UKHomeOffice/hocs-docs-converter)
+
+[hocs-info-service *(deprecated)*](https://github.com/UKHomeOffice/hocs-info-service)
+
+[hocs-notify](https://github.com/UKHomeOffice/hocs-notify)
+
+[hocs-search](https://github.com/UKHomeOffice/hocs-search)
+
+[hocs-templates](https://github.com/UKHomeOffice/hocs-templates)
+
+[hocs-workflow](https://github.com/UKHomeOffice/hocs-workflow)
+
+## UI components
+[hocs-frontend](https://github.com/UKHomeOffice/hocs-frontend)
+
+[hocs-management-ui](https://github.com/UKHomeOffice/hocs-management-ui)
+
+## Utility components
+[hocs-toolbox](https://github.com/UKHomeOffice/hocs-toolbox)
+
+[hocs-queue-tool](https://github.com/UKHomeOffice/hocs-queue-tool)
+
+### Infrastructure
+[hocs-base-image](https://github.com/UKHomeOffice/hocs-base-image)
+
+[hocs-ci-infrastructure](https://github.com/UKHomeOffice/hocs-ci-infrastructure)
+
+[match-label-action](https://github.com/UKHomeOffice/match-label-action)
+
+[semver-calculate-action](https://github.com/UKHomeOffice/semver-calculate-action)
+
+[semver-tag-action](https://github.com/UKHomeOffice/semver-tag-action)
+
+
+
+
 
 ## Submodules
 
