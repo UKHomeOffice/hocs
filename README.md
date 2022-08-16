@@ -57,6 +57,10 @@ Almost all HOCS code is open-source and publicly available on GitHub.
 
 [hocs-ci-infrastructure](https://github.com/UKHomeOffice/hocs-ci-infrastructure)
 
+[kube-hocs 🔒️](https://github.com/UKHomeOffice/kube-hocs)
+
+[hocs-github-actions](https://github.com/UKHomeOffice/hocs-github-actions)
+
 [match-label-action](https://github.com/UKHomeOffice/match-label-action)
 
 [semver-calculate-action](https://github.com/UKHomeOffice/semver-calculate-action)
@@ -69,7 +73,7 @@ Almost all HOCS code is open-source and publicly available on GitHub.
 [hocs-migration-schema](https://github.com/UKHomeOffice/hocs-migration-schema)
 
 ### Pull Request
-[view open pull requests shortcut](https://github.com/pulls?q=is%3Aopen+repo%3AUKHomeOffice%2Fhocs-migration-schema+is%3Aopen+repo%3AUKHomeOffice%2Fhocs-ukvi-complaint-schema+is%3Aopen+repo%3AUKHomeOffice%2Fhocs-ci-infrastructure+repo%3AUKHomeOffice%2Fsemver-calculate-action+repo%3AUKHomeOffice%2Fhocs-extracts+repo%3AUKHomeOffice%2Fhocs-toolbox+repo%3AUKHomeOffice%2Fhocs-audit+repo%3AUKHomeOffice%2Fhocs-case-creator+repo%3AUKHomeOffice%2Fhocs-casework+repo%3AUKHomeOffice%2Fhocs-docs+repo%3AUKHomeOffice%2Fhocs-docs-converter+repo%3AUKHomeOffice%2Fhocs-info-service+repo%3AUKHomeOffice%2Fkube-hocs+repo%3AUKHomeOffice%2Fhocs-search+repo%3AUKHomeOffice%2Fhocs-management-ui+repo%3AUKHomeOffice%2Fhocs-templates+repo%3AUKHomeOffice%2Fhocs-notify+repo%3AUKHomeOffice%2Fhocs-workflow+repo%3AUKHomeOffice%2Fhocs-frontend+repo%3AUKHomeOffice%2Fhocs-base-image+repo%3AUKHomeOffice%2Fhocs+repo%3AUKHomeOffice%2Fhocs-ukvi-complaint-schema+repo%3AUKHomeOffice%2Fhocs-data+repo%3AUKHomeOffice%2Fhocs-data-wcs+repo%3AUKHomeOffice%2Fhocs-queue-tool+repo%3AUKHomeOffice%2Fmatch-label-action+repo%3AUKHomeOffice%2Fsemver-tag-action+)
+[view open pull requests shortcut](https://github.com/pulls?q=is%3Aopen+repo%3AUKHomeOffice%2Fhocs-audit+repo%3AUKHomeOffice%2Fhocs-extracts+repo%3AUKHomeOffice%2Fhocs-case-creator+repo%3AUKHomeOffice%2Fhocs-casework+repo%3AUKHomeOffice%2Fhocs-data+repo%3AUKHomeOffice%2Fhocs-data-wcs+repo%3AUKHomeOffice%2Fhocs-docs+repo%3AUKHomeOffice%2Fhocs-docs-converter+repo%3AUKHomeOffice%2Fhocs-info-service+repo%3AUKHomeOffice%2Fhocs-notify+repo%3AUKHomeOffice%2Fhocs-search+repo%3AUKHomeOffice%2Fhocs-templates+repo%3AUKHomeOffice%2Fhocs-workflow+repo%3AUKHomeOffice%2Fhocs-frontend+repo%3AUKHomeOffice%2Fhocs-management-ui+repo%3AUKHomeOffice%2Fhocs-toolbox+repo%3AUKHomeOffice%2Fhocs-queue-tool+repo%3AUKHomeOffice%2Fhocs-base-image+repo%3AUKHomeOffice%2Fhocs-ci-infrastructure+repo%3AUKHomeOffice%2Fkube-hocs+repo%3AUKHomeOffice%2Fhocs-github-actions+repo%3AUKHomeOffice%2Fmatch-label-action+repo%3AUKHomeOffice%2Fsemver-calculate-action+repo%3AUKHomeOffice%2Fsemver-tag-action+repo%3AUKHomeOffice%2Fhocs-ukvi-complaint-schema+repo%3AUKHomeOffice%2Fhocs-migration-schema)
 
 
 ## Submodules
