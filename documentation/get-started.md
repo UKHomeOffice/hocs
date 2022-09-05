@@ -3,6 +3,7 @@ layout: sub-navigation
 order: 1
 title: Get started
 ---
+
 ## What is DECS?
 HOCS (Home Office Correspondence System), known in business contexts as DECS, is a tracking and routing tool that “allows Home Office teams to control and audit the flow of all correspondence through its life-cycle from receipt to final response”.
 
