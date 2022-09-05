@@ -64,3 +64,13 @@ Almost all HOCS code is open-source and publicly available on GitHub.
 [hocs-ukvi-complaint-schema](https://github.com/UKHomeOffice/hocs-ukvi-complaint-schema)
 
 [hocs-migration-schema](https://github.com/UKHomeOffice/hocs-migration-schema)
+
+## Submodules
+
+This project contains a 'ci' submodule with a docker-compose and infrastructure scripts in it.
+
+Most modern IDEs will handle pulling this automatically for you, but if not, run:
+
+```console
+$ git submodule update --init --recursive
+```

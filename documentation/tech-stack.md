@@ -28,6 +28,9 @@ The technology stack has been chosen based on the following criteria:
 - H2SQL (in memory for testing)
 - Flyway (for migrations)
 
+### Workflows
+- BPMN (Business Process Model and Notation) via [Camunda](https://camunda.com/)
+
 ### Integration
 - Apache Camel
 - AWS SQS
