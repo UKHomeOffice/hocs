@@ -29,11 +29,11 @@ jobs:
           npm install
           npm run-script build
       - name: Publish
-        uses: actions/upload-pages-artifact@1
+        uses: actions/upload-pages-artifact@v1
         with:
           PATH: documentation/_site
       - name: Deploy
-        uses: actions/deploy-pages@1
+        uses: actions/deploy-pages@v1
         with:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: main
