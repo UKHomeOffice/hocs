@@ -11,8 +11,17 @@ module.exports = function(eleventyConfig) {
 
   // Register the plugin
   eleventyConfig.addPlugin(govukEleventyPlugin, {
+    fontFamily: 'system-ui, sans-serif',
     header: {
       productName: 'DECS Documentation',
+    },
+    footer: {
+      copyright: {
+        text: '© Crown Copyright'
+      },
+      contentLicence: {
+        html: 'Licensed under the <a class="govuk-footer__link" href="https://github.com/x-govuk/govuk-eleventy-plugin/blob/main/LICENSE.txt">MIT Licence</a>, except where otherwise stated'
+      },
     },
     pathPrefix,
     url,
