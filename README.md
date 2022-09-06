@@ -36,6 +36,8 @@ Almost all HOCS code is open-source and publicly available on GitHub.
 
 [hocs-notify](https://github.com/UKHomeOffice/hocs-notify)
 
+[hocs-outbound-proxy](https://github.com/UKHomeOffice/hocs-outbound-proxy)
+
 [hocs-search](https://github.com/UKHomeOffice/hocs-search)
 
 [hocs-templates](https://github.com/UKHomeOffice/hocs-templates)
