@@ -14,13 +14,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - run: cd documentation
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'npm'
+          cache-dependency-path: ./documentation/package-lock.json
       - name: Build
+        working-directory: documentation
         run: |
           npm install
           npm run-script build
