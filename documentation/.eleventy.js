@@ -5,7 +5,8 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(govukEleventyPlugin, {
     header: {
       productName: 'DECS Documentation',
-    }
+    },
+    pathPrefix: 'https://ukhomeoffice.github.io/hocs'
   })
 
   return {
