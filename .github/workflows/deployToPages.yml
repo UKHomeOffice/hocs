@@ -11,6 +11,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -25,8 +28,12 @@ jobs:
         run: |
           npm install
           npm run-script build
+      - name: Publish
+        uses: actions/upload-pages-artifact
+        with:
+          PATH: documentation/_site
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: actions/deploy-pages
         with:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: main
