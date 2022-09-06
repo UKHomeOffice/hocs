@@ -1,15 +1,25 @@
 const govukEleventyPlugin = require('govuk-eleventy-plugin')
 
 module.exports = function(eleventyConfig) {
+  const url = process.env.GITHUB_ACTIONS
+      ? 'https://ukhomeoffice.github.io/hocs/'
+      : '/';
+
+  const pathPrefix = process.env.GITHUB_ACTIONS
+      ? '/hocs/'
+      : '/';
+
   // Register the plugin
   eleventyConfig.addPlugin(govukEleventyPlugin, {
     header: {
       productName: 'DECS Documentation',
     },
-    pathPrefix: 'https://ukhomeoffice.github.io/hocs'
+    pathPrefix,
+    url,
   })
 
   return {
+    pathPrefix,
     dataTemplateEngine: 'njk',
     htmlTemplateEngine: 'njk',
     markdownTemplateEngine: 'njk',
