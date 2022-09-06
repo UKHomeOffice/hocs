@@ -1,0 +1,16 @@
+{
+  "name": "hocs-documentation",
+  "version": "1.0.0",
+  "description": "The documentation for DECS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "eleventy"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@11ty/eleventy": "^1.0.2",
+    "govuk-eleventy-plugin": "^3.0.1"
+  }
+}
