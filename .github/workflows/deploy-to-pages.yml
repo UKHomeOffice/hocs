@@ -4,7 +4,13 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'documentation/**'
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   pages: write
@@ -44,3 +50,13 @@ jobs:
         id: deployment
         with:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Post failure to Slack channel
+        id: slack
+        uses: slackapi/slack-github-action@v1.21.0
+        if: ${{ failure() }}
+        with:
+          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+          slack-message: "GitHub Action failure: ${{github.repository}}\nRun: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}\nOriginating PR: ${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
