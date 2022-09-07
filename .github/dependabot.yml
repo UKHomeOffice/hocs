@@ -14,7 +14,7 @@ updates:
       - "skip-release"
       - "dependencies"
   - package-ecosystem: "npm"
-    directory: "/documentation"
+    directory: "documentation"
     schedule:
       interval: "daily"
     commit-message:
