@@ -8,6 +8,7 @@ The documentation (_TODO: Add link_) folder of this repo is deployed to a GitHub
 
 ## 1. Check our changes
 The recommended solution is to use Structurizr Lite (_TODO: Add link_) to preview our documents.
+- Run `docker run -it --rm -p 8080:8080 -v PATH:/usr/local/structurizr structurizr/lite`, where path is the directory that the `workspace.json` is in.
 
 ## 2. Promote our changes
 Each view of DECS will have its own corresponding file in the documentation/architecture/diagrams/ (_TODO: Add link_) folder. These will need to be updated and committed to trigger and update of the GitHub Pages site.

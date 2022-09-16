@@ -1,3 +1,5 @@
 /docker/keycloak/hsperfdata_jboss
 .env
 .idea
+/diagrams-as-code/architecture/.structurizr
+/diagrams-as-code/architecture/workspace.json
