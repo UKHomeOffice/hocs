@@ -1,6 +1,6 @@
 ---
 layout: sub-navigation
-order: 5
+order: 6
 title: Running services with Docker
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: sub-navigation
-order: 1
+order: 2
 title: Get started
 ---
 
