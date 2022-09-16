@@ -74,3 +74,8 @@ Most modern IDEs will handle pulling this automatically for you, but if not, run
 ```console
 $ git submodule update --init --recursive
 ```
+
+If you are creating a new repository you can add the ci submodule with:
+```console
+$ git submodule add -b main https://github.com/UKHomeOffice/hocs-ci-infrastructure.git ci
+```

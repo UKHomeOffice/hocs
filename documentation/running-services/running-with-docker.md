@@ -1,12 +1,12 @@
 ---
 layout: sub-navigation
-order: 6
+order: 2
 title: Running services with Docker
 ---
 
-## Docker Compose
+## Docker Compose for local development
 
-The [hocs](https://github.com/UKHomeOffice/hocs) repository contains a [Docker Compose](https://docs.docker.com/compose/) file.
+The [hocs](https://github.com/UKHomeOffice/hocs) repository contains a [Docker Compose](https://docs.docker.com/compose/) file in `hocs/docker/docker-compose.yml`.
 
 ### Pull all services
 From the project root run:
