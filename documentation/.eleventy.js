@@ -13,7 +13,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(govukEleventyPlugin, {
     fontFamily: 'system-ui, sans-serif',
     header: {
-      productName: 'DECS Documentation',
+      productName: 'DECS Developer Documentation',
     },
     footer: {
       copyright: {
