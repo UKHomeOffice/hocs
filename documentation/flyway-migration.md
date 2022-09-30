@@ -1,6 +1,6 @@
 ---
 layout: sub-navigation
-order: 5
+order: 50
 title: Flyway data migration
 ---
 

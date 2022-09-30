@@ -1,6 +1,6 @@
 ---
 layout: sub-navigation
-order: 3
+order: 30
 title: Technology stack
 ---
 ## Technology Stack

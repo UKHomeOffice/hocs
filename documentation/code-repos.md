@@ -1,6 +1,6 @@
 ---
 layout: sub-navigation
-order: 4
+order: 40
 title: Code repositories
 ---
 
