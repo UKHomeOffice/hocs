@@ -1,3 +1,6 @@
 /docker/keycloak/hsperfdata_jboss
 .env
 .idea
+
+/documentation/_site
+/documentation/node_modules
