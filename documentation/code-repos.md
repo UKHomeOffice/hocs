@@ -54,6 +54,10 @@ Almost all HOCS code is open-source and publicly available on GitHub.
 
 [hocs-github-actions](https://github.com/UKHomeOffice/hocs-github-actions)
 
+[hocs-helm-charts](https://github.com/UKHomeOffice/hocs-helm-charts)
+
+[hocs-helmfile](https://github.com/UKHomeOffice/hocs-helmfile)
+
 [match-label-action](https://github.com/UKHomeOffice/match-label-action)
 
 [semver-calculate-action](https://github.com/UKHomeOffice/semver-calculate-action)
