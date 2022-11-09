@@ -41,6 +41,8 @@ Almost all HOCS code is open-source and publicly available on GitHub.
 [hocs-management-ui](https://github.com/UKHomeOffice/hocs-management-ui)
 
 ### Utility components
+[hocs-casework-search-indexer](https://github.com/UKHomeOffice/hocs-casework-search-indexer)
+
 [hocs-toolbox](https://github.com/UKHomeOffice/hocs-toolbox)
 
 [hocs-queue-tool](https://github.com/UKHomeOffice/hocs-queue-tool)
@@ -55,6 +57,8 @@ Almost all HOCS code is open-source and publicly available on GitHub.
 [hocs-github-actions](https://github.com/UKHomeOffice/hocs-github-actions)
 
 [hocs-helm-charts](https://github.com/UKHomeOffice/hocs-helm-charts)
+
+[hocs-helm-kubectl](https://github.com/UKHomeOffice/hocs-helm-kubectl)
 
 [hocs-helmfile](https://github.com/UKHomeOffice/hocs-helmfile)
 
