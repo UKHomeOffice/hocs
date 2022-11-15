@@ -73,17 +73,3 @@ Almost all HOCS code is open-source and publicly available on GitHub.
 
 [hocs-migration-schema](https://github.com/UKHomeOffice/hocs-migration-schema)
 
-## Submodules
-
-This project contains a 'ci' submodule with a docker-compose and infrastructure scripts in it.
-
-Most modern IDEs will handle pulling this automatically for you, but if not, run:
-
-```console
-$ git submodule update --init --recursive
-```
-
-If you are creating a new repository you can add the ci submodule with:
-```console
-$ git submodule add -b main https://github.com/UKHomeOffice/hocs-ci-infrastructure.git ci
-```

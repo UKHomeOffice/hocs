@@ -14,6 +14,8 @@ module.exports = function(eleventyConfig) {
     fontFamily: 'system-ui, sans-serif',
     header: {
       productName: 'DECS Developer Documentation',
+      organisationLogo: null,
+      organisationName: 'Home Office'
     },
     footer: {
       copyright: {
