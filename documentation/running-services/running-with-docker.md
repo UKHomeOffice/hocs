@@ -14,10 +14,28 @@ From the project root run:
 $ docker-compose -f ./ci/docker-compose.yml pull
 ```
 
+The docker image for the data is stored in AWS ECR, to pull it you will need to set up
+an AWS profile and then run one of the following (depending on your AWS CLI version):
+
+AWS-CLI v1.*
+```console
+$ $(aws ecr get-login --no-include-email --profile acp-ecr)
+```
+
+AWS-CLI v2.*
+```console
+$ aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin 340268328991.dkr.ecr.eu-west-2.amazonaws.com
+```
+
+To be able to pull the image you need to be in authorised to do so.
+This is in the ACP Hub in the Docker repos section.
+
+AWS credentials are stored in the ACP hub, under your "Connected Identities" section.
+
 ### Start typical services and the frontend
 From the project root run:
 ```console
-$ docker-compose -f ./ci/docker-compose.yml up -d frontend 
+$ docker-compose -f ./ci/docker-compose.yml up -d frontend
 ```
 
 >With Docker using 4 GB of memory, this takes approximately 2 minutes to startup.
@@ -25,7 +43,7 @@ $ docker-compose -f ./ci/docker-compose.yml up -d frontend
 ### Start typical service and the frontend including search
 From the project root run:
 ```console
-$ docker-compose -f ./ci/docker-compose.yml -f ./ci/docker-compose.elastic.yml up -d frontend 
+$ docker-compose -f ./ci/docker-compose.yml -f ./ci/docker-compose.elastic.yml up -d frontend
 ```
 
 >Docker will need more than 4 GB of memory, or for developing against elasticsearch just start localstack:
@@ -49,7 +67,7 @@ $ docker-compose -f ./ci/docker-compose.yml -f ./ci/docker-compose.elastic.yml u
 ### Stop the services
 From the project root run:
 ```console
-$ docker-compose -f ./ci/docker-compose.yml stop
+$ docker-compose -f ./ci/docker-compose.yml ./ci/docker-compose.elastic.yml stop
 ```
 > This will retain data in the local database and other volumes.
 
