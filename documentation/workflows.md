@@ -39,18 +39,18 @@ Generally, in the implementation workflows for DECS, the workflow will pause whe
 ### User input in workflows
 User input is entirely driven by the definition for forms that appear to the user. The processes for user input are defined as User Tasks in Camunda, with a Form Key defined. The Form Key value should match the screen schema name.
 
-![A screenshot of Camunda Modeler showing a User Task and schema defintion](/assets/images/camunda-form-key.png "A screenshot of Camunda Modeler showing a User Task and schema definition")
+![A screenshot of Camunda Modeler showing a User Task and schema defintion](../assets/images/camunda-form-key.png "A screenshot of Camunda Modeler showing a User Task and schema definition")
 
 ### Logic gateways
 Gateways provide a break in the flow, whereby the direction can be changed based on variables that should be available to the Camunda process and can be used in expressions to determine which flow path to take. In the example below, a variable called "complete" is evaluated to determine if the workflow should take the path that progresses to the "End" node or the flow that takes the workflow to the "Send Complete Reminder" task.
 
 The variables evaluated are internal within the Camunda engine and BPMN diagrams used for the flows.
 
-![A screenshot of Camunda Modeler showing a gateway in a workflow](/assets/images/camunda-gateway.png "A screenshot of Camunda Modeler showing a gateway in a workflow")
+![A screenshot of Camunda Modeler showing a gateway in a workflow](../assets/images/camunda-gateway.png "A screenshot of Camunda Modeler showing a gateway in a workflow")
 
 ### Service tasks
 Service tasks are processes in the workflow that requires some execution of an expression that does not require the users input.
 
 This does mean that any variables that the expression requires need to be available to the Camunda process. Process tasks can be designed provide a lot of functions, however, DECS normally uses these to execute custom methods defined in the `hocs-workflow` [BPMN service](https://github.com/UKHomeOffice/hocs-workflow/blob/main/src/main/java/uk/gov/digital/ho/hocs/workflow/BpmnService.java).
 
-![A screenshot of Camunda Modeler showing service task configuration](/assets/images/camunda-bpmn-service.png "A screenshot of Camunda Modeler showing service task configuration")
+![A screenshot of Camunda Modeler showing service task configuration](../assets/images/camunda-bpmn-service.png "A screenshot of Camunda Modeler showing service task configuration")
