@@ -18,7 +18,7 @@ There are two different types of screens within the system:
 - [Global](#global)
 - [Case specific](#case-specific)
 
-Screens are stored within the `hocs-workflow` service [(link)](https://github.com/UKHomeOffice/hocs-workflow/tree/main/src/main/resources/screens). The name of the file is the name of the screen. 
+Screens are stored within the [`hocs-workflow` service](https://github.com/UKHomeOffice/hocs-workflow/tree/main/src/main/resources/screens). The name of the file is the name of the screen. 
 
 ### Global
 
