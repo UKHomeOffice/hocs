@@ -13,16 +13,23 @@ related:
 The concept of a workflow is key to understanding how a case on DECS is worked.
 
 ## What is a DECS workflow?
-A workflow on DECS is defined using Business Process Model and Notation, and is orchestrated in the application by [Camunda](https://camunda.com/).
+A workflow on DECS is defined using Business Process Model and Notation (BPMN), and is orchestrated in the application by [Camunda](https://camunda.com/).
 
 > If you are unfamiliar with BPMN and Camunda, [follow a tutorial](https://camunda.com/bpmn/) to get a basic understanding of the principles.
 
-The workflows are defined in and controlled by the [`hocs-workflow` service](https://github.com/UKHomeOffice/hocs-workflow/).
+The workflows are defined in and controlled by the [`hocs-workflow` service](https://github.com/UKHomeOffice/hocs-workflow/), stored in the [processes directory](https://github.com/UKHomeOffice/hocs-workflow/tree/main/src/main/resources/processes).
 
 The DECS workflows are designed to support the caseworking areas and cover the business processes in operation required to deal with a unit of correspondence. A workflow defined in DECS is not necessarily all-encompassing of all the business processes in operation in a business unit. 
 
+
 ## Camunda workflows
+
+### BPMN diagrams
 Camunda when used as a workflow engine relies on `.bpmn` files that are loaded into the Camunda Engine instance when the hosting application (`hocs-workflow`) starts.
+
+A `.bpmn` file is written in XML syntax; the syntax can be generated into a diagram then viewed/edited via tooling such as [Camunda Modeler](https://camunda.com/download/modeler/).
+
+### Process instances
 Each process is given a unique identifier within the instance so that when a process is starting the unique identifier can be passed to the Camunda engine so that it knows which process to start; for DECS, the identifier is the designated case type.
 
 Each process has a starting node and an ending node, and a flow path that directs the process from one to another. When a process starts, the Camunda engine will process every node, task, flow and other elements of the workflow process until such time as it cannot progress any further. 
