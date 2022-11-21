@@ -3,11 +3,11 @@ layout: sub-navigation
 order: 9
 title: Workflows
 related:
-sections:
-- title: Related links
-items:
-- text: Screens
-href: ./screens
+  sections:
+    - title: Related links
+      items:
+        - text: Screens
+          href: ../screens
 ---
 
 The concept of a workflow is key to understanding how a case on DECS is worked.
