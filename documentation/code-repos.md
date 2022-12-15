@@ -11,8 +11,6 @@ Almost all HOCS code is open-source and publicly available on GitHub.
 ### Core components
 [hocs-audit](https://github.com/UKHomeOffice/hocs-audit)
 
-[hocs-extracts](https://github.com/UKHomeOffice/hocs-extracts)
-
 [hocs-case-creator](https://github.com/UKHomeOffice/hocs-case-creator)
 
 [hocs-casework](https://github.com/UKHomeOffice/hocs-casework)
