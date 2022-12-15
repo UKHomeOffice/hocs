@@ -52,8 +52,6 @@ Almost all HOCS code is open-source and publicly available on GitHub.
 
 [hocs-ci-infrastructure](https://github.com/UKHomeOffice/hocs-ci-infrastructure)
 
-[hocs-network-policies 🔒️](https://github.com/UKHomeOffice/hocs-network-policies)
-
 [hocs-github-actions](https://github.com/UKHomeOffice/hocs-github-actions)
 
 [hocs-helm-charts](https://github.com/UKHomeOffice/hocs-helm-charts)
