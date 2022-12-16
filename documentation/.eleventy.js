@@ -29,6 +29,8 @@ module.exports = function(eleventyConfig) {
     url,
   })
 
+  eleventyConfig.addPassthroughCopy('./assets')
+
   return {
     pathPrefix,
     dataTemplateEngine: 'njk',
