@@ -67,7 +67,7 @@ $ docker-compose -f ./ci/docker-compose.yml -f ./ci/docker-compose.elastic.yml u
 ### Stop the services
 From the project root run:
 ```console
-$ docker-compose -f ./ci/docker-compose.yml ./ci/docker-compose.elastic.yml stop
+$ docker-compose -f ./ci/docker-compose.yml -f ./ci/docker-compose.elastic.yml stop
 ```
 > This will retain data in the local database and other volumes.
 
