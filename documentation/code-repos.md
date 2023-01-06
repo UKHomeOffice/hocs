@@ -45,6 +45,14 @@ Almost all HOCS code is open-source and publicly available on GitHub.
 
 [hocs-queue-tool](https://github.com/UKHomeOffice/hocs-queue-tool)
 
+### Deployment repos ###
+
+[hocs-deployments-notprod](https://github.com/UKHomeOffice/hocs-deployments-notprod)
+
+[hocs-deployments-prod](https://github.com/UKHomeOffice/hocs-deployments-prod)
+
+[hocs-deployments-base](https://github.com/UKHomeOffice/hocs-deployments-base)
+
 ### Infrastructure
 [hocs-base-image](https://github.com/UKHomeOffice/hocs-base-image)
 
@@ -56,13 +64,13 @@ Almost all HOCS code is open-source and publicly available on GitHub.
 
 [hocs-helm-kubectl](https://github.com/UKHomeOffice/hocs-helm-kubectl)
 
-[hocs-helmfile](https://github.com/UKHomeOffice/hocs-helmfile)
-
 [match-label-action](https://github.com/UKHomeOffice/match-label-action)
 
 [semver-calculate-action](https://github.com/UKHomeOffice/semver-calculate-action)
 
 [semver-tag-action](https://github.com/UKHomeOffice/semver-tag-action)
+
+[update-helmfile-action](https://github.com/UKHomeOffice/update-helmfile-action)
 
 ### Schemas
 [hocs-ukvi-complaint-schema](https://github.com/UKHomeOffice/hocs-ukvi-complaint-schema)
