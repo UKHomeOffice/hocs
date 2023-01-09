@@ -13,7 +13,7 @@ Almost all HOCS code is open-source and publicly available on GitHub.
 Receives audit event messages from an SQS queue for persistent storage.
 
 [hocs-case-creator](https://github.com/UKHomeOffice/hocs-case-creator)
-Reads a message containing a JSON payload from an AWS SQS Queue, and creates a cases with associateed data.
+Reads a message containing a JSON payload from an AWS SQS Queue, and creates a cases with associated data.
 
 [hocs-casework](https://github.com/UKHomeOffice/hocs-casework)
 Handles interactions with reference data specific to cases.
@@ -25,7 +25,7 @@ The CS schema.
 The WCS schema.
 
 [hocs-docs](https://github.com/UKHomeOffice/hocs-docs)
-Handles interactions with documents stored in S3.
+Handles interactions with documents stored in S3, document conversion, and virus scanning.
 
 [hocs-docs-converter](https://github.com/UKHomeOffice/hocs-docs-converter)
 Accepts any document as a parameter and returns a `.pdf` document.
@@ -37,7 +37,7 @@ Handles various reference data interactions.
 Sends emails to users based on system events.
 
 [hocs-search](https://github.com/UKHomeOffice/hocs-search)
-Serves the search functionality through the use of `elasticsearch`.
+Serves the search functionality through the use of `elasticsearch` /  `opensearch`.
 
 [hocs-templates](https://github.com/UKHomeOffice/hocs-templates)
 Handles templates stored in S3 for use within caseworking functions.
@@ -54,13 +54,13 @@ Handles interactions with the workflow engine, powered by [Camunda](https://camu
 
 ### Utility components
 [hocs-casework-search-indexer](https://github.com/UKHomeOffice/hocs-casework-search-indexer)
-Reindexs all data in hocs-casework to the hocs-search `elasticsearch index.
+Reindexs all data in hocs-casework to the hocs-search `elasticsearch` index.
 
 [hocs-toolbox](https://github.com/UKHomeOffice/hocs-toolbox)
-Tools to interact with an environment's databases and AWS resources.
+Tools to interact with an environment's databases.
 
 [hocs-queue-tool](https://github.com/UKHomeOffice/hocs-queue-tool)
-A utility to investigate and manage Dead Letter Queues.
+A utility to manage and purge queues - both SQS and DLQ.
 
 ### Deployment repos ###
 
