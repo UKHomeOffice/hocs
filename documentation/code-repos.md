@@ -53,6 +53,9 @@ Handles interactions with the workflow engine, powered by [Camunda](https://camu
 [React](https://reactjs.org/) application for performing management utility functions.
 
 ### Utility components
+[hocs](https://github.com/UKHomeOffice/hocs)
+Contains documentation (this site) and bash scripts. Launch services locally via Docker Compose from `hocs` repo.
+
 [hocs-casework-search-indexer](https://github.com/UKHomeOffice/hocs-casework-search-indexer)
 Reindexs all data in hocs-casework to the hocs-search `elasticsearch` index.
 
