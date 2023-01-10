@@ -6,7 +6,7 @@ title: Code repositories
 
 ## Getting the code
 
-Almost all HOCS code is open-source and publicly available on GitHub.
+Almost all HOCS code is open-source and publicly available on GitHub. This page lists the GitHub repos and a [GitHub PR filter](#github-pull-request-filter).
 
 ### Core components
 [hocs-audit](https://github.com/UKHomeOffice/hocs-audit)
@@ -107,3 +107,42 @@ The JSON schema for the UKVI Complaints Management complaint schema.
 
 [hocs-migration-schema](https://github.com/UKHomeOffice/hocs-migration-schema)
 The JSON schema for the case migration.
+
+
+## GitHub Pull Request filter
+See all PRs with a [GitHub PR filter](https://github.com/pulls?q=is%3Aopen+repo%3AUKHomeOffice%2Fhocs-audit+repo%3AUKHomeOffice%2Fhocs-extracts+repo%3AUKHomeOffice%2Fhocs-case-creator+repo%3AUKHomeOffice%2Fhocs-casework+repo%3AUKHomeOffice%2Fhocs-data+repo%3AUKHomeOffice%2Fhocs-data-wcs+repo%3AUKHomeOffice%2Fhocs-docs+repo%3AUKHomeOffice%2Fhocs-docs-converter+repo%3AUKHomeOffice%2Fhocs-info-service+repo%3AUKHomeOffice%2Fhocs-notify+repo%3AUKHomeOffice%2Fhocs-search+repo%3AUKHomeOffice%2Fhocs-templates+repo%3AUKHomeOffice%2Fhocs-workflow+repo%3AUKHomeOffice%2Fhocs-frontend+repo%3AUKHomeOffice%2Fhocs-management-ui+repo%3AUKHomeOffice%2Fhocs-toolbox+repo%3AUKHomeOffice%2Fhocs-queue-tool+repo%3AUKHomeOffice%2Fhocs-base-image+repo%3AUKHomeOffice%2Fhocs-ci-infrastructure+repo%3AUKHomeOffice%2Fkube-hocs+repo%3AUKHomeOffice%2Fhocs-github-actions+repo%3AUKHomeOffice%2Fmatch-label-action+repo%3AUKHomeOffice%2Fsemver-calculate-action+repo%3AUKHomeOffice%2Fsemver-tag-action+repo%3AUKHomeOffice%2Fhocs-ukvi-complaint-schema+repo%3AUKHomeOffice%2Fhocs-migration-schema). The filter has the rule:
+```
+is:open
+repo:UKHomeOffice/hocs
+repo:UKHomeOffice/hocs-audit
+repo:UKHomeOffice/hocs-case-creator
+repo:UKHomeOffice/hocs-casework
+repo:UKHomeOffice/hocs-data
+repo:UKHomeOffice/hocs-data-wcs
+repo:UKHomeOffice/hocs-docs
+repo:UKHomeOffice/hocs-docs-converter
+repo:UKHomeOffice/hocs-info-service
+repo:UKHomeOffice/hocs-notify
+repo:UKHomeOffice/hocs-search
+repo:UKHomeOffice/hocs-templates
+repo:UKHomeOffice/hocs-workflow
+repo:UKHomeOffice/hocs-frontend
+repo:UKHomeOffice/hocs-management-ui
+repo:UKHomeOffice/hocs-casework-search-indexer
+repo:UKHomeOffice/hocs-toolbox
+repo:UKHomeOffice/hocs-queue-tool
+repo:UKHomeOffice/hocs-deployments-notprod
+repo:UKHomeOffice/hocs-deployments-prod
+repo:UKHomeOffice/hocs-deployments-base
+repo:UKHomeOffice/hocs-base-image
+repo:UKHomeOffice/hocs-ci-infrastructure
+repo:UKHomeOffice/hocs-github-actions
+repo:UKHomeOffice/hocs-helm-charts
+repo:UKHomeOffice/hocs-helm-kubectl
+repo:UKHomeOffice/match-label-action
+repo:UKHomeOffice/semver-calculate-action
+repo:UKHomeOffice/semver-tag-action
+repo:UKHomeOffice/update-helmfile-action
+repo:UKHomeOffice/hocs-ukvi-complaint-schema
+repo:UKHomeOffice/hocs-migration-schema
+```
