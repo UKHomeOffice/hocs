@@ -1,6 +1,6 @@
 ---
 layout: sub-navigation
-order: 7
+order: 8
 title: Service level caching
 ---
 
