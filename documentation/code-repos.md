@@ -36,6 +36,9 @@ Handles various reference data interactions.
 [hocs-notify](https://github.com/UKHomeOffice/hocs-notify)
 Sends emails to users based on system events.
 
+[hocs-outbound-proxy](https://github.com/UKHomeOffice/hocs-outbound-proxy)
+A transparent proxy using Squid, to be used in conjunction with kubernetes network policies, traffic is limited to whitelisted domains.
+
 [hocs-search](https://github.com/UKHomeOffice/hocs-search)
 Serves the search functionality through the use of `elasticsearch` /  `opensearch`.
 
