@@ -11,6 +11,6 @@
   "license": "MIT",
   "dependencies": {
     "@11ty/eleventy": "^1.0.2",
-    "govuk-eleventy-plugin": "^3.0.3"
+    "govuk-eleventy-plugin": "^4.0.0"
   }
 }
