@@ -8,6 +8,17 @@ title: Running services with Docker
 
 The [hocs](https://github.com/UKHomeOffice/hocs) repository contains a [Docker Compose](https://docs.docker.com/compose/) file in `hocs/docker/docker-compose.yml`.
 
+### Contents:
+- [Pull all services](#pull-all-services)
+- [Start typical services and the frontend](#start-typical-services-and-the-frontend)
+- [Start typical services and the frontend including search](#start-typical-services-and-the-frontend-including-search)
+- [Start localstack (sqs, sns, s3)](#start-localstack-(sqs%2C-sns%2C-s3))
+- [Start localstack (sqs, sns, s3, es)](#start-localstack-(sqs%2C-sns%2C-s3%2C-es))
+- [Stop the services](#stop-the-services)
+- [Stop and remove containers, networks, images, and volumes](#stop-and-remove-containers%2C-networks%2C-images%2C-and-volumes%2C)
+- [Start individual services without any dependencies](#start-individual-services-without-any-dependencies)
+- [.env file](#use-of-.env-file)
+
 ### Pull all services
 From the project root run:
 ```console
@@ -40,7 +51,7 @@ $ docker-compose -f ./ci/docker-compose.yml up -d frontend
 
 >With Docker using 4 GB of memory, this takes approximately 2 minutes to startup.
 
-### Start typical service and the frontend including search
+### Start typical services and the frontend including search
 From the project root run:
 ```console
 $ docker-compose -f ./ci/docker-compose.yml -f ./ci/docker-compose.elastic.yml up -d frontend
