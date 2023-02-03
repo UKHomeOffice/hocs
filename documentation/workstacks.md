@@ -14,7 +14,7 @@ A workstack displays a collection of cases to the user.
 There are several types of workstacks available.
 
 ### Team
-Displays all the open cases allocated to a specific team. Team workstacks for the teams the user is assigned to are displayed to the user on the main Dashboard.
+Displays all the open cases allocated to a specific team. User-assigned team workstacks are displayed to the user on the main Dashboard.
 
 ### Workflow
 Displays a subset of the cases allocated to a specific team; cases allocated to the team being processed on a specific workflow type.
