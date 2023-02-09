@@ -3,8 +3,10 @@ layout: sub-navigation
 order: 2
 title: Running services with Docker
 ---
+[[toc]]
 
 ## Docker Compose for local development
+
 
 The [hocs](https://github.com/UKHomeOffice/hocs) repository contains a [Docker Compose](https://docs.docker.com/compose/) file in `hocs/docker/docker-compose.yml`.
 
@@ -40,7 +42,7 @@ $ docker-compose -f ./ci/docker-compose.yml up -d frontend
 
 >With Docker using 4 GB of memory, this takes approximately 2 minutes to startup.
 
-### Start typical service and the frontend including search
+### Start typical services and the frontend including search
 From the project root run:
 ```console
 $ docker-compose -f ./ci/docker-compose.yml -f ./ci/docker-compose.elastic.yml up -d frontend
