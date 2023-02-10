@@ -3,6 +3,7 @@ layout: sub-navigation.njk
 order: 1
 title: Submodules
 ---
+[[toc]]
 
 This project contains a 'ci' submodule with a docker-compose and infrastructure scripts in it; `hocs-ci-infrastructure`.
 

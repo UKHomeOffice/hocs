@@ -12,6 +12,8 @@ related:
           href: ./secondary-actions
 ---
 
+[[toc]]
+
 Screens (or forms) are used throughout the frontend to collect information from the user.
 
 There are two different types of screens within the system:

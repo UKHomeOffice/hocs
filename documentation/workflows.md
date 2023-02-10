@@ -2,6 +2,7 @@
 layout: sub-navigation.njk
 order: 10
 title: Workflows
+description: The concept of a workflow is key to understanding how a case on DECS is worked.
 related:
   sections:
     - title: Related links
@@ -10,7 +11,7 @@ related:
           href: ../screens
 ---
 
-The concept of a workflow is key to understanding how a case on DECS is worked.
+[[toc]]
 
 ## What is a DECS workflow?
 A workflow on DECS is defined using Business Process Model and Notation (BPMN), and is orchestrated in the application by [Camunda](https://camunda.com/).

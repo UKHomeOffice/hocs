@@ -12,7 +12,9 @@ related:
           - text: Secondary Actions
             href: ../secondary-actions
 ---
-          
+
+[[toc]]
+
 ## Schema
 
 ```json

@@ -3,6 +3,7 @@ layout: sub-navigation.njk
 order: 4
 title: Code repositories
 ---
+[[toc]]
 
 ## Getting the code
 

@@ -2,8 +2,8 @@
 layout: sub-navigation.njk
 order: 11
 title: Workstacks
+description: Workstacks are a pattern implemented in DECS for casework management.
 ---
-Workstacks are a pattern implemented in DECS for casework management.
 
 [[toc]]
 
