@@ -1,5 +1,5 @@
 ---
-layout: sub-navigation
+layout: sub-navigation.njk
 title: Fields
 order: 10
 description: Information relating to screen fields.

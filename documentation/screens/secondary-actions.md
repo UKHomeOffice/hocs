@@ -1,5 +1,5 @@
 ---
-layout: sub-navigation
+layout: sub-navigation.njk
 title: Secondary Actions
 order: 20
 description: Information relating to screen secondary actions.
