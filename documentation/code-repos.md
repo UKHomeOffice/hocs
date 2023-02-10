@@ -1,5 +1,5 @@
 ---
-layout: sub-navigation
+layout: sub-navigation.njk
 order: 4
 title: Code repositories
 ---

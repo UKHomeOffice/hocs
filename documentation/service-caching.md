@@ -1,5 +1,5 @@
 ---
-layout: sub-navigation
+layout: sub-navigation.njk
 order: 8
 title: Service level caching
 ---

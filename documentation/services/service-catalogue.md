@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: page.njk
 order: 10
 title: Service catalogue
 ---

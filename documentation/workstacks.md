@@ -1,5 +1,5 @@
 ---
-layout: sub-navigation
+layout: sub-navigation.njk
 order: 11
 title: Workstacks
 ---
