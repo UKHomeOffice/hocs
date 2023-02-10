@@ -4,6 +4,8 @@ order: 6
 title: Flyway data migration
 ---
 
+[[toc]]
+
 This documentation covers:
 
 - How to load the info schema.

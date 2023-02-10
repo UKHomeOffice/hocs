@@ -12,7 +12,9 @@ related:
           - text: Fields
             href: ../fields
 ---
-          
+
+[[toc]]
+
 ## Schema
 
 ```json
