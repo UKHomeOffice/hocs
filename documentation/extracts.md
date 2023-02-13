@@ -58,4 +58,4 @@ Only some combinations of case types and SOMU types result in valid extract URLs
 Users do not get access to the extract functionality by default. A subset of users can access extracts, providing they have the appropriate Keycloak roles.
 
 ## Configuration
-Some extract configuration is [defined in JSON](https://github.com/UKHomeOffice/hocs-audit/tree/main/src/main/resources/config) in `hocs-audit`.
+Some [extract configuration is defined in JSON](https://github.com/UKHomeOffice/hocs-audit/tree/main/src/main/resources/config) in `hocs-audit`.
