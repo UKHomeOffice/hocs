@@ -2,18 +2,21 @@
 layout: sub-navigation.njk
 order: 12
 title: Extracts
-description: Extracts in CSV file format can be generated to give users the ability to produce reports.
+description: Extracts in CSV file format can be generated.
 ---
 
 [[toc]]
 
-DECS provides a number of extracts in CSV file format to give users the ability to produce reports. To get access to these reporting extracts, a specific role has to be added to a user within keycloak.
+DECS provides a number of extracts in CSV file format. To get access to these extracts, a specific role has to be added to a user within keycloak.
 
 The user will need to have access to the environment to pull the extract and will need to be logged into the application to pull the extract (user will be prompted to login if not already authenticated).
 
 Most extracts are generated from the database at the time the extract is requested, and therefore show live data for the environment targeted.
 
 Extracts are generated via requests through to [hocs-audit](https://github.com/UKHomeOffice/hocs-audit) and defined [services](https://github.com/UKHomeOffice/hocs-audit/tree/main/src/main/java/uk/gov/digital/ho/hocs/audit/service).
+
+## Definition
+The terms "extracts" and "reports" are sometimes used interchangeably, however there is an important distinction to be made: The CSV Extracts do not report on anything themselves, they are purely a raw extract of data held on the platform.
 
 ## Extract types
 There are 3 standard types of extracts:
@@ -74,6 +77,8 @@ SOMU exports [execute via the `DataExportResource`](https://github.com/UKHomeOff
 
 Only some combinations of case types and SOMU types result in valid extract URLs, as not all case types use SOMU functionality.
 
+SOMU types are [configured in the info-schema🔒](https://github.com/UKHomeOffice/hocs-data).
+
 #### Example path
 Example path, with parameters `CASETYPE`, `SOMUTYPE`, `fromDate`, `toDate`:
 ```
@@ -85,9 +90,22 @@ Some user groups have specific custom exports [which execute via the `CustomExpo
 
 The custom exports are based on materialized views, [defined in `hocs-audit`](https://github.com/UKHomeOffice/hocs-audit/blob/main/config/materializedviews/Audit-Schema-DataUpdates.sql).
 
-The materialized views can be generated on a scheduled job processing the report ahead of time. This means reports can be ready for download immediately, but with the drawback they do not present a real-time snapshot.
+#### Scheduled jobs
+The materialized views can be generated on a scheduled job processing the extract ahead of time. This means large custom extracts can be ready for download immediately, but with the drawback they do not present a real-time snapshot.
 
-Scheduled refresh jobs are [configured in the Helm charts](https://github.com/UKHomeOffice/hocs-helm-charts/blob/main/charts/hocs-audit/templates/refresh-dcu-cases-view-job.yaml) and enabled on a per-environment deployment-value basis, [also managed via Helm🔒️](https://github.com/UKHomeOffice/hocs-deployments-prod).
+As the amount of data involved in the generation of the view increases, the time taken to generate the view will also grow. For very large datasets this may need to be considered when selecting a time of day to run a extract, consider; maintenance windows, operational support hours, standard user group operating hours.
+
+Scheduled refresh jobs are [configured in the Helm charts](https://github.com/UKHomeOffice/hocs-helm-charts/blob/main/charts/hocs-audit/templates/refresh-dcu-cases-view-job.yaml) and enabled on a per-environment basis, also managed via Helm for all [notprod🔒](https://github.com/UKHomeOffice/hocs-deployments-notprod) and [prod🔒️](https://github.com/UKHomeOffice/hocs-deployments-prod) environments.
+
+The jobs are enabled by providing values in a `hocs-audit` deployment, for example:
+```
+dcuCaseView:
+  enabled: true
+```
+
+#### Manually refreshing materialized views
+If a materialized view requires a manual refresh, for example in a local development environment, or in the event a scheduled job fails, the SQL can be executed or the cron job started.
+
 
 #### Example path
 Example path, with parameter `MATERIALIZEDVIEW`:
