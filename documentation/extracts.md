@@ -7,7 +7,7 @@ description: Extracts in CSV file format can be generated.
 
 [[toc]]
 
-DECS provides a number of extracts in CSV file format. To get access to these extracts, a specific role has to be added to a user within keycloak.
+DECS provides a number of extracts in CSV file format. To get access to these extracts, a specific role [has to be added to a user within keycloak](#permissions).
 
 The user will need to have access to the environment to pull the extract and will need to be logged into the application to pull the extract (user will be prompted to login if not already authenticated).
 
@@ -95,7 +95,7 @@ The materialized views can be generated on a scheduled job processing the extrac
 
 As the amount of data involved in the generation of the view increases, the time taken to generate the view will also grow. For very large datasets this may need to be considered when selecting a time of day to run a extract, consider; maintenance windows, operational support hours, standard user group operating hours.
 
-Scheduled refresh jobs are [configured in the Helm charts](https://github.com/UKHomeOffice/hocs-helm-charts/blob/main/charts/hocs-audit/templates/refresh-dcu-cases-view-job.yaml) and enabled on a per-environment basis, also managed via Helm for all [notprod🔒](https://github.com/UKHomeOffice/hocs-deployments-notprod) and [prod🔒️](https://github.com/UKHomeOffice/hocs-deployments-prod) environments.
+Scheduled refresh jobs interact directly with the database. The jobs are [configured in the Helm charts](https://github.com/UKHomeOffice/hocs-helm-charts/blob/main/charts/hocs-audit/templates/refresh-dcu-cases-view-job.yaml) and enabled on a per-environment basis, also managed via Helm for all [notprod🔒](https://github.com/UKHomeOffice/hocs-deployments-notprod) and [prod🔒️](https://github.com/UKHomeOffice/hocs-deployments-prod) environments.
 
 The jobs are enabled by providing values in a `hocs-audit` deployment, for example:
 ```
