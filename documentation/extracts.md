@@ -124,3 +124,26 @@ The role/URI configuration is managed via [Helm chart values](https://github.com
 
 ## Configuration
 Some [extract configuration is defined in JSON](https://github.com/UKHomeOffice/hocs-audit/tree/main/src/main/resources/config) in `hocs-audit`.
+
+## Conversion request parameters
+Some extracts allow optional parameters to toggle conversions in the extract processing.
+
+Depending on the extract, there are two types of conversion which can be toggled; a header converter and a data converter.
+
+### Header conversion
+When some user groups migrated from legacy systems onto DECS, there was a need to align the extract formatting to the legacy format to support downstream processing.
+
+The `convertHeader` parameter was introduced to toggle this behaviour, along with [the `HeaderConverter` functionality](https://github.com/UKHomeOffice/hocs-audit/blob/main/src/main/java/uk/gov/digital/ho/hocs/audit/service/domain/converter/HeaderConverter.java).
+
+The mapping between the legacy headers and DECS headers are defined in a [configuration mapping file](https://github.com/UKHomeOffice/hocs-audit/blob/main/src/main/resources/headers.config).
+
+The header conversion translates the column headers on the extracts to values from the legacy system.
+
+### Data conversion
+Data conversion can also be toggled on some extracts via the `convert` parameter.
+
+If the `convert=true` parameter is passed in the request, translations are performed on data within the extract prior to serving the CSV to the user.
+
+UUIDs exist as data values within the raw data, however to make the extract more readable and workable in downstream processing, the UUIDs can be converted to a more readable and understandable format.
+
+Types of UUIDs which can be converted include; correspondents, users, topics, and entity lists, however what is converted on each extract is specified on the service, for example [within the `CaseDataExportService`](https://github.com/UKHomeOffice/hocs-audit/blob/main/src/main/java/uk/gov/digital/ho/hocs/audit/service/CaseDataExportService.java#L128).
