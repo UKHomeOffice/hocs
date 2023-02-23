@@ -41,17 +41,20 @@ Documents are stored in S3 buckets. Documents uploaded to the system are first p
 Once processing is complete and successful, documents are moved to a trusted bucket.
 
 ## Document processing
-A document uploaded to DECS goes through several steps in a process flow before being deemed ready to be accessed on a case.
+Interactions with documents are managed through the [hocs-docs service](https://github.com/UKHomeOffice/hocs-docs).
+
+A document uploaded to DECS goes through several steps in a process flow before being deemed ready to be accessed on a case:
 
 1. A document is uploaded
 2. Document data is saved to document schema
 3. Document is stored in Untrusted bucket
-4. Document is scanned
-5. Convert the document to `.pdf`, if failed scan the generated document is a failed document PDF file
+4. Document is scanned with malware scanning tools
+5. Convert the document to `.pdf`, if the document failed the malware scan the generated document is a failed document PDF file
 6. Copy the document to the Trusted bucket
 7. Update data in document schema
 
 While a document is being processed, it is presented in a "Pending" state to the user on a case. Queues are used within the process, so the time a document will remain in a "Pending" state can vary.
+
 
 ### Supported formats
 Supported document formats are [defined in the Helm charts](https://github.com/UKHomeOffice/hocs-helm-charts/blob/main/charts/hocs-frontend/values.yaml#L25).
@@ -60,6 +63,8 @@ Local network policies may restrict certain document formats being transferred a
 
 ## Conversion and previews
 DECS holds the original documents uploaded to the system, but also converts documents into `.pdf` format to be displayed in a preview panel on a case view.
+
+Document conversions are provided by the [hocs-docs-converter service](https://github.com/UKHomeOffice/hocs-docs-converter).
 
 A user can view a converted document in the preview panel within DECS on a case, or alternatively download the original document from the case for viewing locally on a machine.
 
