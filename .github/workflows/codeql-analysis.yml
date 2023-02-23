@@ -1,4 +1,5 @@
-name: 'CodeQL'
+name: "CodeQL Scan"
+
 on:
   push:
     branches: [ main ]
@@ -7,8 +8,9 @@ on:
     paths:
       - 'documentation/**'
   schedule:
-    - cron: '0 12 * * *'
+    - cron: '45 12 * * 1'
 
 jobs:
-  analyze:
-    uses: UKHomeOffice/hocs-github-actions/.github/workflows/codeql-analysis-javascript.yml@v2
+  scan:
+    uses: UKHomeOffice/sas-github-workflows/.github/workflows/codeql-analysis-npm.yml@v1
+    secrets: inherit
