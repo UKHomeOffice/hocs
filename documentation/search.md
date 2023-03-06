@@ -44,3 +44,8 @@ Messages are pulled from the queue and processed through the [`SearchListener`](
 In some cases there are custom behaviours applied to an event before the change to the search index is made.
 
 ## UI form
+The form in the UI is provided by `hocs-frontend`, with the [configuration held in the node server](https://github.com/UKHomeOffice/hocs-frontend/blob/main/server/config/searchFields/config.json).
+
+The form configuration is defined by case type which the user has access to.
+
+Should the user have access to multiple case types, the form configurations are combined.
