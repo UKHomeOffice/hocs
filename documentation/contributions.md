@@ -24,17 +24,18 @@ The Contributions capability is used by caseworking teams to track what contribu
 ## Single Object, Multiple Use (SOMU)
 The SOMU (pronounced so-mew) pattern allows for configurations to be defined, to cater for various workflow use cases.
 
+### SOMU Types
 SOMU configurations are known as a "SOMU Type". A SOMU Type is [defined in the info schema](https://github.com/UKHomeOffice/hocs-info-service/blob/main/src/main/java/uk/gov/digital/ho/hocs/info/domain/model/SomuType.java), and holds a defined schema.
 
-### SOMU Schema
+#### SOMU Schema
 A SOMU Type holds a configuration object known as a schema. SOMU Type schemas hold definitions of forms and tables. Forms and tables are [rendered in the UI via `hocs-frontend`](https://github.com/UKHomeOffice/hocs-frontend/blob/main/src/shared/common/forms/composite/somu-list.jsx).
 
-#### Form definitions
+##### Form definitions
 The schema defines the configuration and behaviour in the UI for the Contributions forms.
 
 A typical SOMU Type schema will define forms for the SOMU Type to use, and fields which should be utilised on the forms. Examples of defined forms on a SOMU Type could include forms for adding and editing a Contribution Request.
 
-#### Table renderer definitions
+##### Table renderer definitions
 A SOMU Type schema also defines the table renderer to use for the Contributions display. The table renderer is a different UI component from the forms, and is used for displaying the status of Contribution Requests within a workflow screen.
 
 From within the Contribution table renderer component, displayed on a workflow screen, Contribution Requests can be added and edited.
@@ -43,5 +44,15 @@ Typical information to display in a Contributions table renderer within a workfl
 
 This allows for a quick view of the status of a Contribution Request when a caseworker views the workflow screen on a case.
 
+### SOMU Items
+When a Contribution Request is created on a case, a corresponding [record of a SOMU Item](https://github.com/UKHomeOffice/hocs-casework/blob/main/src/main/java/uk/gov/digital/ho/hocs/casework/domain/model/SomuItem.java) is created.
+
+A SOMU Item holds the information related to a specific Contribution Request. This information would typically be the information gathered from the form, defined by the SOMU Type.
+
+A SOMU Item is a piece of information relating to a case, and therefore is stored in the casework schema.
+
 ## Extracts
-Contribution Requests implemented via the SOMU pattern [have specific extracts](../extracts/#single-object%2C-multiple-use-(somu)).   
+Contribution Requests implemented via the SOMU pattern [have specific extracts](../extracts/#single-object%2C-multiple-use-(somu)).
+
+## Workstacks
+Contribution Requests can be [processed on stages](https://github.com/UKHomeOffice/hocs-casework/blob/main/src/main/java/uk/gov/digital/ho/hocs/casework/contributions/ContributionsProcessorImpl.java), and displayed in [workstacks](../workstacks) with appropriate workstack columns and renderer defined.
