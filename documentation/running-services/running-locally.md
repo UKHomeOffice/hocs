@@ -1,8 +1,10 @@
 ---
-layout: sub-navigation
+layout: sub-navigation.njk
 order: 1
 title: Running services locally
 ---
+
+[[toc]]
 
 This documentation covers how to run services locally, outside of Docker, such as from an IDE.
 

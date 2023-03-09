@@ -1,5 +1,5 @@
 ---
-layout: sub-navigation
+layout: sub-navigation.njk
 order: 9
 title: Screens
 related:
@@ -11,6 +11,8 @@ related:
         - text: Secondary Actions
           href: ./secondary-actions
 ---
+
+[[toc]]
 
 Screens (or forms) are used throughout the frontend to collect information from the user.
 

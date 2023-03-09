@@ -1,11 +1,12 @@
 ---
-layout: sub-navigation
+layout: sub-navigation.njk
 order: 3
 title: Technology stack
 ---
-## Technology Stack
 
-### Criteria
+[[toc]]
+
+## Criteria
 The technology stack has been chosen based on the following criteria:
 - Existing Home Office use
 - Ability to reuse existing services (HO and X-GOV)
@@ -13,40 +14,40 @@ The technology stack has been chosen based on the following criteria:
 - Project requirements
 - Team skillset
 
-### Microservices
+## Microservices
 - Java
 - Spring Boot
 - Spring Data (JPA)
 - Flyway (database migration) scripts
 
-### Frontend
+## Frontend
 - NodeJS
 - ReactJS
 
-### Databases
+## Databases
 - Postgres (AWS RDS)
 - H2SQL (in memory for testing)
 - Flyway (for migrations)
 
-### Workflows
+## Workflows
 - BPMN (Business Process Model and Notation) via [Camunda](https://camunda.com/)
 
-### Integration
+## Integration
 - Apache Camel
 - AWS SQS
 - AWS SNS
 
-### Search
+## Search
 - Elastic Search (AWS)
 
-### Documents
+## Documents
 - JODConverter (Java API to orchestrate LibreOffice)
 - LibreOffice (for document conversion)
 - ClamAV
 
-### Testing
+## Testing
 - Selenium for acceptance tests
 
-### Other
+## Other
 - GitHub Actions
 - Keycloak (ADFS)

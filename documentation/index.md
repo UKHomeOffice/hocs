@@ -1,6 +1,6 @@
 ---
 homepage: true
-layout: product
+layout: product.njk
 order: 1
 title: DECS Developer Documentation
 description: Developer Documentation for the Home Office Digital External Correspondence Service

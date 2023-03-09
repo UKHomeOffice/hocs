@@ -1,8 +1,9 @@
 ---
-layout: sub-navigation
+layout: sub-navigation.njk
 order: 4
 title: Code repositories
 ---
+[[toc]]
 
 ## Getting the code
 
@@ -86,7 +87,7 @@ Minimal docker image for JVM based DECS services.
 [hocs-ci-infrastructure](https://github.com/UKHomeOffice/hocs-ci-infrastructure)
 Referenced by other repos to provide centrally configured, consistent and reusable CI pipeline components.
 
-[hocs-github-actions](https://github.com/UKHomeOffice/hocs-github-actions)
+[sas-github-workflows](https://github.com/UKHomeOffice/sas-github-workflows)
 Contains a set of centrally configured, consistent and reusable CI pipeline components.
 
 [hocs-helm-charts](https://github.com/UKHomeOffice/hocs-helm-charts)
@@ -116,7 +117,7 @@ The JSON schema for the case migration.
 
 
 ## GitHub Pull Request filter
-See all PRs with a [GitHub PR filter](https://github.com/pulls?q=is%3Aopen+repo%3AUKHomeOffice%2Fhocs+repo%3AUKHomeOffice%2Fhocs-audit+repo%3AUKHomeOffice%2Fhocs-case-creator+repo%3AUKHomeOffice%2Fhocs-casework+repo%3AUKHomeOffice%2Fhocs-data+repo%3AUKHomeOffice%2Fhocs-data-wcs+repo%3AUKHomeOffice%2Fhocs-docs+repo%3AUKHomeOffice%2Fhocs-docs-converter+repo%3AUKHomeOffice%2Fhocs-info-service+repo%3AUKHomeOffice%2Fhocs-notify+repo%3AUKHomeOffice%2Fhocs-search+repo%3AUKHomeOffice%2Fhocs-templates+repo%3AUKHomeOffice%2Fhocs-workflow+repo%3AUKHomeOffice%2Fhocs-frontend+repo%3AUKHomeOffice%2Fhocs-management-ui+repo%3AUKHomeOffice%2Fhocs-casework-search-indexer+repo%3AUKHomeOffice%2Fhocs-toolbox+repo%3AUKHomeOffice%2Fhocs-queue-tool+repo%3AUKHomeOffice%2Fhocs-deployments-notprod+repo%3AUKHomeOffice%2Fhocs-deployments-prod+repo%3AUKHomeOffice%2Fhocs-deployments-base+repo%3AUKHomeOffice%2Fhocs-base-image+repo%3AUKHomeOffice%2Fhocs-ci-infrastructure+repo%3AUKHomeOffice%2Fhocs-github-actions+repo%3AUKHomeOffice%2Fhocs-helm-charts+repo%3AUKHomeOffice%2Fhocs-helm-kubectl+repo%3AUKHomeOffice%2Fmatch-label-action+repo%3AUKHomeOffice%2Fsemver-calculate-action+repo%3AUKHomeOffice%2Fsemver-tag-action+repo%3AUKHomeOffice%2Fupdate-helmfile-action+repo%3AUKHomeOffice%2Fhocs-ukvi-complaint-schema+repo%3AUKHomeOffice%2Fhocs-migration-schema). The filter has the rule:
+See all PRs with a [GitHub PR filter](https://github.com/pulls?q=is%3Aopen+repo%3AUKHomeOffice%2Fhocs+repo%3AUKHomeOffice%2Fhocs-audit+repo%3AUKHomeOffice%2Fhocs-case-creator+repo%3AUKHomeOffice%2Fhocs-casework+repo%3AUKHomeOffice%2Fhocs-data+repo%3AUKHomeOffice%2Fhocs-data-wcs+repo%3AUKHomeOffice%2Fhocs-docs+repo%3AUKHomeOffice%2Fhocs-docs-converter+repo%3AUKHomeOffice%2Fhocs-info-service+repo%3AUKHomeOffice%2Fhocs-notify+repo%3AUKHomeOffice%2Fhocs-search+repo%3AUKHomeOffice%2Fhocs-templates+repo%3AUKHomeOffice%2Fhocs-workflow+repo%3AUKHomeOffice%2Fhocs-frontend+repo%3AUKHomeOffice%2Fhocs-management-ui+repo%3AUKHomeOffice%2Fhocs-casework-search-indexer+repo%3AUKHomeOffice%2Fhocs-toolbox+repo%3AUKHomeOffice%2Fhocs-queue-tool+repo%3AUKHomeOffice%2Fhocs-deployments-notprod+repo%3AUKHomeOffice%2Fhocs-deployments-prod+repo%3AUKHomeOffice%2Fhocs-deployments-base+repo%3AUKHomeOffice%2Fhocs-base-image+repo%3AUKHomeOffice%2Fhocs-ci-infrastructure+repo%3AUKHomeOffice%2Fsas-github-workflows+repo%3AUKHomeOffice%2Fhocs-helm-charts+repo%3AUKHomeOffice%2Fhocs-helm-kubectl+repo%3AUKHomeOffice%2Fmatch-label-action+repo%3AUKHomeOffice%2Fsemver-calculate-action+repo%3AUKHomeOffice%2Fsemver-tag-action+repo%3AUKHomeOffice%2Fupdate-helmfile-action+repo%3AUKHomeOffice%2Fhocs-ukvi-complaint-schema+repo%3AUKHomeOffice%2Fhocs-migration-schema). The filter has the rule:
 ```
 is:open
 repo:UKHomeOffice/hocs
@@ -142,7 +143,7 @@ repo:UKHomeOffice/hocs-deployments-prod
 repo:UKHomeOffice/hocs-deployments-base
 repo:UKHomeOffice/hocs-base-image
 repo:UKHomeOffice/hocs-ci-infrastructure
-repo:UKHomeOffice/hocs-github-actions
+repo:UKHomeOffice/sas-github-workflows
 repo:UKHomeOffice/hocs-helm-charts
 repo:UKHomeOffice/hocs-helm-kubectl
 repo:UKHomeOffice/match-label-action

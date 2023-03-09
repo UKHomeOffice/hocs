@@ -1,8 +1,10 @@
 ---
-layout: sub-navigation
+layout: sub-navigation.njk
 order: 6
 title: Flyway data migration
 ---
+
+[[toc]]
 
 This documentation covers:
 
