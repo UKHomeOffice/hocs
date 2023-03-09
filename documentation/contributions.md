@@ -12,7 +12,9 @@ Contributions are a feature of the platform and are used by tenants who have the
 
 A contribution is a piece of information which is requested from a third party by a caseworking team. A third party in this instance could be anyone external to the teams directly involved in the processing of the correspondence, typically a third party could include other teams in the department.
 
-Each tenant who utilises the Contributions feature have their own need for contributions, therefore the Contributions functionality is high level and generic, so it can be adapted to specific workflow needs. A large part of the generic design of Contributions is known as the Single Object, Multiple Use capability.
+Each tenant who utilises the Contributions feature have their own need for contributions, therefore the Contributions functionality is high level and generic, so it can be adapted to specific workflow needs.
+
+There is a distinction made in the platform between requests for a single contribution at a workflow stage, and requests for [multiple contributions](#multiple-contributions-%26-somu).
 
 ## How are Contributions used?
 The Contributions capability is used by caseworking teams to track what contributions from third parties are being requested for a case. The caseworking teams can track:
@@ -21,7 +23,11 @@ The Contributions capability is used by caseworking teams to track what contribu
 - when a request was made
 - when a repsonse is due
 
-## Single Object, Multiple Use (SOMU)
+## Multiple Contributions & SOMU
+In some instances, a case may need more than one contribution from third parties to progress along a workflow. Multiple contributions may be requested from one or more third parties. To handle this scenario, the concept of Multiple Contributions exists.
+
+A large part of the generic design of Multiple Contributions is known as the Single Object, Multiple Use (SOMU) capability.
+
 The SOMU (pronounced so-mew) pattern allows for configurations to be defined, to cater for various workflow use cases.
 
 ### SOMU Types
@@ -36,7 +42,7 @@ The schema defines the configuration and behaviour in the UI for the Contributio
 A typical SOMU Type schema will define forms for the SOMU Type to use, and fields which should be utilised on the forms. Examples of defined forms on a SOMU Type could include forms for adding and editing a Contribution Request.
 
 ##### Table renderer definitions
-A SOMU Type schema also defines the table renderer to use for the Contributions display. The table renderer is a different UI component from the forms, and is used for displaying the status of Contribution Requests within a workflow screen.
+A SOMU Type schema also defines the table renderer to use for the Contributions display. The table renderer is a different UI component from the forms, and is used for displaying the status of Contribution Requests within [a workflow screen](../screens).
 
 From within the Contribution table renderer component, displayed on a workflow screen, Contribution Requests can be added and edited.
 
