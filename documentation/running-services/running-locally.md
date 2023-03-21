@@ -20,7 +20,7 @@ There are pre-requisite VM options that need to be specified for each project th
 | hocs-audit          | -Dspring.profiles.active=development,local,postgres                     |
 | hocs-docs-converter | -Dspring.profiles.active=development,local,postgres                     |
 | hocs-templates      | -Dspring.profiles.active=development,local,postgres                     |
-| hocs-search         | -Dspring.profiles.active=development,local,postgres,localstack,consumer |
+| hocs-search         | -Dspring.profiles.active=development,localstack,consumer |
 
 ## Frontend modules
 For the frontend modules `hocs-frontend` and `hocs-management-ui`:
