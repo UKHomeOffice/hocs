@@ -13,7 +13,7 @@ The [hocs](https://github.com/UKHomeOffice/hocs) repository contains a [Docker C
 ### Pull all services
 From the project root run:
 ```console
-$ docker-compose -f ./ci/docker-compose.yml pull
+$ docker-compose -f ./ci/docker-compose.yml -f ./ci/docker-compose.elastic.yml pull
 ```
 
 The docker image for the data is stored in AWS ECR, to pull it you will need to set up
@@ -76,7 +76,7 @@ $ docker-compose -f ./ci/docker-compose.yml -f ./ci/docker-compose.elastic.yml s
 ### Stop and remove containers, networks, images, and volumes,
 From the project root run:
 ```console
-$ docker-compose -f ./ci/docker-compose.yml rm -vfs
+$ docker-compose -f ./ci/docker-compose.yml -f ./ci/docker-compose.elastic.yml rm -vfs
 ```
 > This will remove the local database and all data.
 
