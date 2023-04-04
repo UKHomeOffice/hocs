@@ -12,6 +12,8 @@ A case on DECS is presented with a timeline. The timeline highlights events and 
 
 The timeline displays items in reverse chronological order, with the most recent item first.
 
+The timeline is [rendered in the sidebar](https://github.com/UKHomeOffice/hocs-frontend/blob/main/src/shared/common/components/side-bar.jsx#L78), and can be configured to display based on the case type of the case being viewed.
+
 ## Timeline items
 Timeline items can be thought of as belonging within a category:
 - System event
