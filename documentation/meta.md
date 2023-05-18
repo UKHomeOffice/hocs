@@ -21,7 +21,5 @@ This documentation makes use of the [XGOVUK Eleventy Plugin](https://x-govuk.git
 ## Deployment
 The deployment is run through the GitHub workflow pipeline, and is configured in the [workflow file](https://github.com/UKHomeOffice/hocs/blob/main/.github/workflows/deploy-to-pages.yml) within the `hocs` repo. 
 
-More information about GitHub pages is in the [GitHub documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
-
 ## Contribute
 To contribute to the documentation, create a branch, push the changes, and [raise a PR for approval](https://github.com/UKHomeOffice/hocs/compare) against the project.
