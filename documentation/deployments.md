@@ -40,6 +40,3 @@ When the PR is approved and merged, the merge to `main` triggers a release to th
 
 ### Release new versions of services
 If the changes are new versions of services to be deployed, the [versions file](https://github.com/UKHomeOffice/hocs-deployments-base/blob/main/environments/example/versions.yaml) is updated with the required versions and services.
-
-
-
