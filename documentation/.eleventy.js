@@ -19,7 +19,7 @@ module.exports = function(eleventyConfig) {
     },
     footer: {
       copyright: {
-        text: '© Crown Copyright'
+        text: '© Crown Copyright 2023'
       },
       contentLicence: {
         html: 'Licensed under the <a class="govuk-footer__link" href="https://github.com/x-govuk/govuk-eleventy-plugin/blob/main/LICENSE.txt">MIT Licence</a>, except where otherwise stated'
