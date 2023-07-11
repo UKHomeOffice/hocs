@@ -34,7 +34,7 @@ jobs:
           npm install
           npm run-script build
       - name: Publish
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           PATH: documentation/_site
 
