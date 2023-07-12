@@ -69,6 +69,10 @@ Tools to interact with an environment's databases.
 [hocs-queue-tool](https://github.com/UKHomeOffice/hocs-queue-tool)
 A utility to manage and purge queues - both SQS and DLQ.
 
+### Testing ### 
+[hocs-serenity-automation](https://github.com/UKHomeOffice/hocs-serenity-automation)
+Automated Cucumber-JVM test pack for DECS built on the Serenity BDD framework
+
 ### Deployment repos ###
 
 [hocs-deployments-notprod 🔒](https://github.com/UKHomeOffice/hocs-deployments-notprod)
