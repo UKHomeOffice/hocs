@@ -14,9 +14,9 @@ module.exports = function(eleventyConfig) {
     brandColour: '#8f23b3',
     fontFamily: 'Roboto, system-ui, sans-serif',
     icons: {
-      mask: pathPrefix+'assets/logos/ho-mask-icon.svg',
-      shortcut: pathPrefix+'assets/logos/ho-favicon.ico',
-      touch: pathPrefix+'assets/logos/ho-apple-touch-icon.png'
+      mask: '/assets/logos/ho-mask-icon.svg',
+      shortcut: '/assets/logos/ho-favicon.ico',
+      touch: '/assets/logos/ho-apple-touch-icon.png'
     },
     opengraphImageUrl: '/assets/logos/ho-opengraph-image.png',
     header: {
