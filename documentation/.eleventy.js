@@ -11,10 +11,17 @@ module.exports = function(eleventyConfig) {
 
   // Register the plugin
   eleventyConfig.addPlugin(govukEleventyPlugin, {
-    fontFamily: 'system-ui, sans-serif',
+    brandColour: '#8f23b3',
+    fontFamily: 'Roboto, system-ui, sans-serif',
+    icons: {
+      mask: pathPrefix+'assets/logos/ho-mask-icon.svg',
+      shortcut: pathPrefix+'assets/logos/ho-favicon.ico',
+      touch: pathPrefix+'assets/logos/ho-apple-touch-icon.png'
+    },
+    opengraphImageUrl: '/assets/logos/ho-opengraph-image.png',
     header: {
       productName: 'DECS Developer Documentation',
-      organisationLogo: null,
+      organisationLogo: '<img src="'+pathPrefix+'assets/logos/ho_logo.svg" height="34px" alt="Home Office Logo">',
       organisationName: 'Home Office'
     },
     footer: {
@@ -27,6 +34,7 @@ module.exports = function(eleventyConfig) {
     },
     pathPrefix,
     url,
+    stylesheets: ['/assets/styles/base.css']
   })
 
   eleventyConfig.addPassthroughCopy('./assets')
