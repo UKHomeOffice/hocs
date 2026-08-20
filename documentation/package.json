@@ -8,10 +8,14 @@
     "build": "eleventy",
     "start": "eleventy --serve"
   },
+  "engines": {
+    "node": ">=24"
+  },
+  "type": "module",
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@11ty/eleventy": "^2.0.1",
-    "@x-govuk/govuk-eleventy-plugin": "^5.0.3"
+    "@11ty/eleventy": "^3.1.6",
+    "@x-govuk/govuk-eleventy-plugin": "^9.0.2"
   }
 }

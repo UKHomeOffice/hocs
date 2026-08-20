@@ -1,0 +1,142 @@
+$_font-family: roboto, system-ui, sans-serif;
+@use "sass:color";
+@use "pkg:govuk-frontend/dist/govuk" as * with (
+  $govuk-font-family: $_font-family,
+  $govuk-functional-colours: (
+    brand: #732282,
+    surface-background: color.scale(#732282, $lightness: 95%),
+  ),
+  $govuk-page-width: 1100px
+);
+
+// Use GOV.UK Eleventy Plugin components
+@use "pkg:@x-govuk/govuk-eleventy-plugin";
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+}
+
+html.govuk-template {
+    background-color: #fff;
+}
+
+body, .govuk-template__body {
+    background-color: #f5f5f5;
+    color: #0b0c0c;
+}
+
+.govuk-template .govuk-header {
+    background-color: #fff;
+    color: #0b0c0c;
+
+    .govuk-header__container {
+        border: none;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .govuk-header__hompage-link, .govuk-header__homepage-link:visited {
+        color: #0b0c0c;
+    }
+
+    .govuk-header__homepage-link {
+        svg {
+            vertical-align: bottom;
+        }
+
+        .hods-header__logo-svg__vertical-line {
+            fill: govuk-functional-colour(brand);
+        }
+
+        &:focus {
+            background-color: govuk-functional-colour(focus);
+            color: govuk-functional-colour(focus-text);
+
+            .hods-header__logo-svg__vertical-line {
+                fill: govuk-functional-colour(focus-text);
+            }
+        }
+    }
+
+    .govuk-header__logotype {
+        display: inline-flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .govuk-header__logo img {
+        vertical-align: bottom;
+    }
+
+    .govuk-header__homepage-link {
+        &:not(:focus) {
+            background-color: transparent;
+        }
+
+        &:link, &:visited {
+            text-decoration: none;
+            color: #0b0c0c;
+        }
+    }
+
+    .app-site-search {
+        @media (max-width: 62.25em) {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .app-site-search__input {
+            border: 1px #cbcbcb solid;
+        }
+    }
+}
+
+.govuk-footer {
+    background-color: #fff;
+    color: #0b0c0c;
+    border: none;
+    padding-top: 0;
+
+    .govuk-width-container {
+        border-top: 10px solid #cbcbcb;
+        padding-top: 45px;
+    }
+}
+
+// Update contrast to WCAG AA for code blocks
+.app-code__string,
+.x-govuk-code__doctag {
+    color: #cb321a;
+}
+
+.app-code__comment,
+.app-code__quote {
+    color: #696e73;
+}
+
+.app-code__type,
+.app-code__class .app-code__title {
+    color: #6669a4;
+}
+
+.x-govuk-related-navigation .govuk-link[aria-current] {
+    font-weight: bold;
+}
+
+// Allows feedback banner to have correct bottom margin.
+.x-govuk-masthead {
+    margin-top: 0;
+}
+
+.govuk-header label.govuk-visually-hidden {
+    color: black;
+}
+
+.govuk-breadcrumbs__link {
+    display: inline-block;
+    min-height: 24px;
+}

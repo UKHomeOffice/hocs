@@ -6,37 +6,38 @@ on:
       - main
     paths:
       - 'documentation/**'
+      - '.github/workflows/deploy-to-pages.yml'
   workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-permissions:
-  pages: write
-  id-token: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 24
           cache: 'npm'
           cache-dependency-path: ./documentation/package-lock.json
       - name: Build
         working-directory: documentation
         run: |
-          npm install
-          npm run-script build
+          npm ci
+          npm run build
       - name: Publish
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v4
         with:
-          PATH: documentation/_site
+          path: documentation/_site
 
   deploy:
     environment:
@@ -44,12 +45,13 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    permissions:
+      pages: write
+      id-token: write
     steps:
       - name: Deploy
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
         id: deployment
-        with:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Post failure to Slack channel
         id: slack

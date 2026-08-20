@@ -91,13 +91,6 @@ $ docker compose -f ./ci/docker-compose.yml up -d management-ui-proxy
 
 Then open the app at `http://localhost:8095`.
 
-### Start typical services and the management ui via the local auth proxy including search
-Set up `ci/.env` first as above, then run:
-
-```console
-$ docker compose -f ./ci/docker-compose.yml -f ./ci/docker-compose.elastic.yml up -d management-ui-proxy
-```
-
 ### Start localstack (sqs, sns, s3)
 From the project root run:
 ```console

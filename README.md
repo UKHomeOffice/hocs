@@ -6,7 +6,6 @@ View developer documentation in GitHub Pages: [DECS Developer Documentation](htt
 Documentation is in the `documentation` directory.
 
 It makes up a static site built with Eleventy and the [XGOV-UK Eleventy Plugin](https://x-govuk.github.io/govuk-eleventy-plugin/).
-
 To build and run the site locally use in the `documentation` directory:
 ```
 npx eleventy --serve

@@ -1,6 +1,7 @@
-const govukEleventyPlugin = require('@x-govuk/govuk-eleventy-plugin')
+import { govukEleventyPlugin } from "@x-govuk/govuk-eleventy-plugin";
+import fs from "node:fs/promises";
 
-module.exports = function(eleventyConfig) {
+export default async function(eleventyConfig) {
   const url = process.env.GITHUB_ACTIONS
       ? 'https://ukhomeoffice.github.io/hocs/'
       : '/';
@@ -9,10 +10,14 @@ module.exports = function(eleventyConfig) {
       ? '/hocs/'
       : '/';
 
+  // Inline logo SVG, allowing the logo elements to be targeted by CSS style rules.
+  // This is so that the purple vertical line can be switched to black when the header link has focus.
+  const svgContents = await fs.readFile('assets/logos/ho_logo.svg', 'utf8');
+  const logoSvg = svgContents.replace('<?xml version="1.0" encoding="UTF-8"?>\n<svg ', '<svg height="34" aria-label="Home Office logo"');
+
+
   // Register the plugin
   eleventyConfig.addPlugin(govukEleventyPlugin, {
-    brandColour: '#8f23b3',
-    fontFamily: 'Roboto, system-ui, sans-serif',
     icons: {
       mask: '/assets/logos/ho-mask-icon.svg',
       shortcut: '/assets/logos/ho-favicon.ico',
@@ -20,9 +25,14 @@ module.exports = function(eleventyConfig) {
     },
     opengraphImageUrl: '/assets/logos/ho-opengraph-image.png',
     header: {
+      logotype: {
+        html:
+            '<span class="govuk-header__logotype">' +
+            logoSvg +
+            '  <span class="govuk-header__logotype-text">Home Office</span>' +
+            '</span>'
+      },
       productName: 'DECS Developer Documentation',
-      organisationLogo: '<img src="'+pathPrefix+'assets/logos/ho_logo.svg" height="34px" alt="Home Office Logo">',
-      organisationName: 'Home Office'
     },
     footer: {
       copyright: {
@@ -43,10 +53,6 @@ module.exports = function(eleventyConfig) {
     pathPrefix,
     dataTemplateEngine: 'njk',
     htmlTemplateEngine: 'njk',
-    markdownTemplateEngine: 'njk',
-    dir: {
-      // Use layouts from the plugin
-      layouts: 'node_modules/@x-govuk/govuk-eleventy-plugin/layouts'
-    }
+    markdownTemplateEngine: 'njk'
   }
 };
