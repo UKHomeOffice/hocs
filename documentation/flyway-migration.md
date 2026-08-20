@@ -27,7 +27,7 @@ The info-service doesn't come with its schema. To load the schema it relies on a
 
 The data_migration step loads the info schema using [flyway](https://flywaydb.org/) scripts.
 
-To select hocs-data or hocs-data-wcs set the variable ``HOCS_DATA_REPO`` in your ``.env`` file to either:
+To select hocs-data or hocs-data-wcs set the variable ``HOCS_DATA_REPO`` in your ``../ci/.env`` file to either:
 * hocs-data (default)
 * hocs-data-wcs
 
