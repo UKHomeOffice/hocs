@@ -35,7 +35,7 @@ jobs:
           npm ci
           npm run build
       - name: Publish
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: documentation/_site
 
